@@ -1,6 +1,6 @@
 import Konva from "konva";
 import { ColorResult } from "@hello-pangea/color-picker";
-import { TextState } from "../types";
+import { TextState } from "../../../../Shared/types";
 
 export type FontWeight = "normal" | "bold" | "lighter" | "bolder" | string;
 
@@ -46,7 +46,7 @@ export interface TextComponentProps {
   selectedTextId: string | null;
   updateTextProperty: (
     property: keyof TextState,
-    value: string | number
+    value: string | number,
   ) => void;
   textFontWeight: FontWeight;
   setTextFontWeight: (weight: FontWeight) => void;

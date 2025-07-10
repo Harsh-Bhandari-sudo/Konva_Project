@@ -1,5 +1,5 @@
 import { ColorResult } from "@hello-pangea/color-picker";
-import { ShapeData } from "../types";
+import { ShapeData } from "../../../Shared/types";
 
 type ShapeType = "rectangle" | "circle" | "triangle" | "star" | "ellipse";
 

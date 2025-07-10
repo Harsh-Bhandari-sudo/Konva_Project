@@ -8,7 +8,7 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-import { CardImage, ShapeData, TextState } from "./types";
+import { CardImage, ShapeData, TextState } from "../Shared/types";
 
 export interface TemplateData {
   shapes: ShapeData[];

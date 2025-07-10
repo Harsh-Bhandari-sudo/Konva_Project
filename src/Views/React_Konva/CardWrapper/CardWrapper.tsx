@@ -19,11 +19,15 @@ import {
   listTemplates,
   TemplateData,
   getTemplate,
-} from "../firebase";
-import { FontFamily } from "../TextComponent/types";
+} from "../../../Services/firebase";
+import { FontFamily } from "../TextComponent/helper/type";
 import { Template } from "../TemplateContainer/types";
-import { ShapeData, CardImage, TextState } from "../types";
-import { sortByZIndex, handleDownload } from "../utils";
+import { ShapeData, CardImage, TextState } from "../../../Shared/types";
+import {
+  sortByZIndex,
+  handleDownload,
+  deleteSelectedItem,
+} from "../../../Shared/utils";
 import TextComponent from "../TextComponent/TextComponent";
 import ImageComponent from "../ImageComponent/ImageComponent";
 import ShapeComponent from "../ShapeComponent/ShapeComponent";
@@ -74,7 +78,7 @@ function CardWrapper() {
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [backgroundImageUrl, setBackgroundImageUrl] = useState<string | null>(
-    null
+    null,
   );
 
   const [textInput, setTextInput] = useState("");
@@ -84,7 +88,7 @@ function CardWrapper() {
   const [textColor, setTextColor] = useState("#000000");
 
   const generateThumbnail = (
-    stageRef: React.RefObject<KonvaStage>
+    stageRef: React.RefObject<KonvaStage>,
   ): string | null => {
     if (!stageRef.current) return null;
 
@@ -159,7 +163,7 @@ function CardWrapper() {
             };
             img.src = imgData.src;
           });
-        })
+        }),
       );
       setImages(restoredImages);
       setSelectedColor(templateData.background.color);
@@ -183,7 +187,7 @@ function CardWrapper() {
       alert(
         `Failed to load template: ${
           error instanceof Error ? error.message : String(error)
-        }`
+        }`,
       );
     } finally {
       setIsLoading(false);
@@ -239,8 +243,8 @@ function CardWrapper() {
     if (selectedShapeId) {
       setShapes(
         shapes.map((shape) =>
-          shape.id === selectedShapeId ? { ...shape, fill: color.hex } : shape
-        )
+          shape.id === selectedShapeId ? { ...shape, fill: color.hex } : shape,
+        ),
       );
     }
   };
@@ -250,8 +254,10 @@ function CardWrapper() {
     if (selectedShapeId) {
       setShapes(
         shapes.map((shape) =>
-          shape.id === selectedShapeId ? { ...shape, stroke: color.hex } : shape
-        )
+          shape.id === selectedShapeId
+            ? { ...shape, stroke: color.hex }
+            : shape,
+        ),
       );
     }
   };
@@ -263,8 +269,8 @@ function CardWrapper() {
         text.map((textItem) =>
           textItem?.id === selectedTextId
             ? { ...textItem, fill: color.hex }
-            : textItem
-        )
+            : textItem,
+        ),
       );
     }
   };
@@ -276,7 +282,7 @@ function CardWrapper() {
       ...shapes.map((s) => s.zIndex),
       ...images.map((i) => i.zIndex),
       ...text.map((t) => t.zIndex),
-      0
+      0,
     );
 
     const newText: TextState = {
@@ -305,7 +311,7 @@ function CardWrapper() {
       ...shapes.map((s) => s.zIndex),
       ...images.map((i) => i.zIndex),
       ...text.map((t) => t.zIndex),
-      0
+      0,
     );
 
     const newShape: ShapeData = {
@@ -332,7 +338,7 @@ function CardWrapper() {
 
   const handleShapeDragEnd = (
     e: KonvaEventObject<DragEvent>,
-    shapeId: string
+    shapeId: string,
   ) => {
     const newShapes = shapes.map((shape) => {
       if (shape.id === shapeId) {
@@ -349,7 +355,7 @@ function CardWrapper() {
 
   const handleImageDragEnd = (
     e: KonvaEventObject<DragEvent>,
-    imageId: string
+    imageId: string,
   ) => {
     const newImages = images.map((image) => {
       if (image.id === imageId) {
@@ -366,7 +372,7 @@ function CardWrapper() {
 
   const handleTextDragEnd = (
     e: KonvaEventObject<DragEvent>,
-    textId: string
+    textId: string,
   ) => {
     const newTexts = text.map((textItem) => {
       if (textItem.id === textId) {
@@ -436,13 +442,15 @@ function CardWrapper() {
   };
   const updateShapeProperty = (
     property: keyof ShapeData,
-    value: number | string
+    value: number | string,
   ) => {
     if (selectedShapeId) {
       setShapes(
         shapes.map((shape) =>
-          shape.id === selectedShapeId ? { ...shape, [property]: value } : shape
-        )
+          shape.id === selectedShapeId
+            ? { ...shape, [property]: value }
+            : shape,
+        ),
       );
 
       const node = stageRef.current?.findOne(`#${selectedShapeId}`);
@@ -478,12 +486,14 @@ function CardWrapper() {
     if (selectedImageId) {
       setImages((prevImages) =>
         prevImages.map((image) =>
-          image.id === selectedImageId ? { ...image, [property]: value } : image
-        )
+          image.id === selectedImageId
+            ? { ...image, [property]: value }
+            : image,
+        ),
       );
 
       const node = stageRef.current?.findOne(
-        `#${selectedImageId}`
+        `#${selectedImageId}`,
       ) as Konva.Image;
       if (node) {
         if (property === "width") {
@@ -499,15 +509,15 @@ function CardWrapper() {
   };
   const updateTextProperty = (
     property: keyof TextState,
-    value: string | number
+    value: string | number,
   ) => {
     if (selectedTextId) {
       setText((prevText) =>
         prevText.map((textItem) =>
           textItem.id === selectedTextId
             ? { ...textItem, [property]: value }
-            : textItem
-        )
+            : textItem,
+        ),
       );
       if (property === "fontSize") {
         setTextFontSize(Number(value));
@@ -519,7 +529,7 @@ function CardWrapper() {
       ...shapes.map((s) => s.zIndex),
       ...images.map((i) => i.zIndex),
       ...text.map((t) => t.zIndex),
-      0
+      0,
     );
 
     if (selectedShapeId) {
@@ -536,7 +546,7 @@ function CardWrapper() {
       ...shapes.map((s) => s.zIndex),
       ...images.map((i) => i.zIndex),
       ...text.map((t) => t.zIndex),
-      0
+      0,
     );
 
     if (selectedShapeId) {
@@ -586,28 +596,8 @@ function CardWrapper() {
     }
   };
 
-  const deleteSelectedShape = () => {
-    if (selectedShapeId) {
-      setShapes(shapes.filter((shape) => shape.id !== selectedShapeId));
-      setSelectedShapeId(null);
-    }
-  };
-
-  const deleteSelectedImage = () => {
-    if (selectedImageId) {
-      setImages(images.filter((image) => image.id !== selectedImageId));
-      setSelectedImageId(null);
-    }
-  };
-
-  const deleteSelectedText = () => {
-    if (selectedTextId) {
-      setText(text.filter((textItem) => textItem.id !== selectedTextId));
-      setSelectedTextId(null);
-    }
-  };
   const convertTemplateListItemToTemplate = (
-    item: TemplateListItem
+    item: TemplateListItem,
   ): Template => {
     return {
       ...item,
@@ -649,7 +639,7 @@ function CardWrapper() {
               ...shapes.map((s) => s.zIndex),
               ...images.map((i) => i.zIndex),
               ...text.map((t) => t.zIndex),
-              0
+              0,
             );
             const newImage: CardImage = {
               id: Date.now().toString() + Math.random(),
@@ -736,7 +726,7 @@ function CardWrapper() {
               updates.width = Math.max(10, circle.radius() * 2 * node.scaleX());
               updates.height = Math.max(
                 10,
-                circle.radius() * 2 * node.scaleY()
+                circle.radius() * 2 * node.scaleY(),
               );
               break;
             case "triangle":
@@ -747,7 +737,7 @@ function CardWrapper() {
           }
 
           setShapes(
-            shapes.map((s) => (s.id === shape.id ? { ...s, ...updates } : s))
+            shapes.map((s) => (s.id === shape.id ? { ...s, ...updates } : s)),
           );
           node.scaleX(1);
           node.scaleY(1);
@@ -813,7 +803,7 @@ function CardWrapper() {
         opacity={imageData.opacity}
         onTransformEnd={() => {
           const node = stageRef.current?.findOne(
-            `#${imageData.id}`
+            `#${imageData.id}`,
           ) as Konva.Image;
 
           if (node) {
@@ -830,8 +820,8 @@ function CardWrapper() {
                       height: newHeight,
                       rotation: node.rotation(),
                     }
-                  : img
-              )
+                  : img,
+              ),
             );
             node.scaleX(1);
             node.scaleY(1);
@@ -865,7 +855,7 @@ function CardWrapper() {
         listening
         onTransformEnd={() => {
           const node = stageRef.current?.findOne(
-            `#${textData.id}`
+            `#${textData.id}`,
           ) as Konva.Text;
           console.log("node of text");
           if (node) {
@@ -1004,7 +994,14 @@ function CardWrapper() {
           {activeFilter === "shape" && (
             <ShapeComponent
               selectedImageId={selectedImageId}
-              deleteSelectedShape={deleteSelectedShape}
+              deleteSelectedShape={() =>
+                deleteSelectedItem<ShapeData>({
+                  items: shapes,
+                  selectedId: selectedShapeId ?? "",
+                  setItems: setShapes,
+                  setSelectedItemsId: setSelectedShapeId,
+                })
+              }
               sendToBack={sendToBack}
               moveBackward={moveBackward}
               moveForward={moveForward}
@@ -1026,7 +1023,14 @@ function CardWrapper() {
               handleImageClick={handleImageClick}
               selectedImageId={selectedImageId}
               images={images}
-              deleteSelectedImage={deleteSelectedImage}
+              deleteSelectedImage={() =>
+                deleteSelectedItem<CardImage>({
+                  items: images,
+                  selectedId: selectedImageId ?? "",
+                  setItems: setImages,
+                  setSelectedItemsId: setSelectedImageId,
+                })
+              }
               sendToBack={sendToBack}
               handleDragOver={handleDragOver}
               dragOver={dragOver}
@@ -1044,7 +1048,14 @@ function CardWrapper() {
           {/* CUSTOMIZE TEXT */}
           {activeFilter === "text" && (
             <TextComponent
-              deleteSelectedText={deleteSelectedText}
+              deleteSelectedText={() =>
+                deleteSelectedItem<TextState>({
+                  items: text,
+                  selectedId: selectedTextId ?? "",
+                  setItems: setText,
+                  setSelectedItemsId: setSelectedTextId,
+                })
+              }
               handleTextClick={handleTextClick}
               text={text}
               stageRef={stageRef}

@@ -17,9 +17,14 @@ const TEXT = {
   BUTTON: {
     REMOVE: "Remove",
     START_DESIGNING: "Start Designing",
+    SAVING: "Saving...",
+    SAVE_TEMPLATE: "Save Template",
   },
   ICON: {
     CROSS: "×",
+  },
+  PLACEHOLDER: {
+    ENTER_TEMPLATE_NAME: "Enter Template Name",
   },
 };
 

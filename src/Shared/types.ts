@@ -1,4 +1,4 @@
-import { FontFamily } from "./TextComponent/types";
+import { FontFamily } from "../Views/React_Konva/TextComponent/helper/type";
 
 export interface CardImage {
   id: string;
@@ -75,4 +75,12 @@ export interface TemplateData {
     height: number;
   };
   thumbnail?: string | null;
+}
+
+// deleteSlectedItem Interface
+export interface DeleteSelectedItem<T> {
+  items: T[];
+  selectedId: string;
+  setItems: React.Dispatch<React.SetStateAction<T[]>>;
+  setSelectedItemsId: (selected: null) => void;
 }

@@ -1,3 +1,5 @@
+import { DeleteSelectedItem } from "./types";
+
 export const sortByZIndex = (a: { zIndex: number }, b: { zIndex: number }) =>
   a.zIndex - b.zIndex;
 
@@ -11,5 +13,17 @@ export const handleDownload = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  }
+};
+
+export const deleteSelectedItem = <T extends { id: string }>({
+  items,
+  selectedId,
+  setItems,
+  setSelectedItemsId,
+}: DeleteSelectedItem<T>) => {
+  if (selectedId) {
+    setItems(items.filter((item) => item?.id !== selectedId));
+    setSelectedItemsId(null);
   }
 };

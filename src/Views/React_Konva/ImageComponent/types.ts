@@ -1,5 +1,5 @@
 import { RefObject } from "react";
-import { CardImage } from "../types";
+import { CardImage } from "../../../Shared/types";
 
 type ImageProperty =
   | "width"

@@ -8,7 +8,7 @@ import {
 import "../../DynamicCss/CustomizeImage/CustomizeImage.css";
 import { useRef, useEffect } from "react";
 import Konva from "konva";
-import { ShapeData, CardImage, TextState } from "../types";
+import { ShapeData, CardImage, TextState } from "../../../Shared/types";
 import { RenderImageProps } from "./types";
 
 function RenderImage({

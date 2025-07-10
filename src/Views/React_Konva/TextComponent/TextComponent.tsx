@@ -1,7 +1,12 @@
-import { SketchPicker } from "@hello-pangea/color-picker";
+// libs
 import { useEffect, useRef } from "react";
 import Konva from "konva";
-import { TextComponentProps, FontFamily, FontWeight } from "./types";
+import { SketchPicker } from "@hello-pangea/color-picker";
+
+// constants
+import { TextComponentProps, FontFamily, FontWeight } from "./helper/type";
+import CLASSNAME from "../../../Shared/className";
+import { FONT_WEIGHT_PROPERTY, FONT_FAMILY_PROPERTY } from "./helper/constant";
 
 function TextComponent({
   deleteSelectedText,
@@ -45,6 +50,7 @@ function TextComponent({
       transformerRef.current.getLayer()?.batchDraw();
     }
   }, [selectedTextId]);
+
   useEffect(() => {
     if (selectedTextId && transformerRef.current) {
       const textNode = stageRef.current?.findOne(`#${selectedTextId}`);
@@ -79,11 +85,11 @@ function TextComponent({
   }, [selectedTextId]);
 
   return (
-    <div className="text-options">
+    <div className={CLASSNAME.LAYOUT.TEXT_OPTIONS}>
       <h4>Add Text</h4>
 
-      <div className="text-input-section">
-        <div className="input-group">
+      <div className={CLASSNAME.LAYOUT.TEXT_INPUT_SECTION}>
+        <div className={CLASSNAME.LAYOUT.INPUT_GROUP}>
           <label>Enter Text:</label>
           <input
             type="text"
@@ -140,10 +146,11 @@ function TextComponent({
               }
             }}
           >
-            <option value="normal">Normal</option>
-            <option value="bold">Bold</option>
-            <option value="lighter">Light</option>
-            <option value="bolder">Extra Bold</option>
+            {FONT_WEIGHT_PROPERTY.map((weight) => (
+              <option key={weight.value} value={weight.value}>
+                {weight.label}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -159,16 +166,11 @@ function TextComponent({
               }
             }}
           >
-            <option value="Arial">Arial</option>
-            <option value="Helvetica">Helvetica</option>
-            <option value="Times New Roman">Times New Roman</option>
-            <option value="Georgia">Georgia</option>
-            <option value="Verdana">Verdana</option>
-            <option value="Courier New">Courier New</option>
-            <option value="Comic Sans MS">Comic Sans MS</option>
-            <option value="Impact">Impact</option>
-            <option value="Trebuchet MS">Trebuchet MS</option>
-            <option value="Palatino">Palatino</option>
+            {FONT_FAMILY_PROPERTY.map((family) => (
+              <option key={family.value} value={family.value}>
+                {family.label}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -223,10 +225,11 @@ function TextComponent({
                   updateTextProperty("fontStyle", e.target.value)
                 }
               >
-                <option value="normal">Normal</option>
-                <option value="bold">Bold</option>
-                <option value="lighter">Light</option>
-                <option value="bolder">Extra Bold</option>
+                {FONT_WEIGHT_PROPERTY.map((weight) => (
+                  <option key={weight.value} value={weight.value}>
+                    {weight.label}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -238,16 +241,11 @@ function TextComponent({
                   updateTextProperty("fontFamily", e.target.value)
                 }
               >
-                <option value="Arial">Arial</option>
-                <option value="Helvetica">Helvetica</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Verdana">Verdana</option>
-                <option value="Courier New">Courier New</option>
-                <option value="Comic Sans MS">Comic Sans MS</option>
-                <option value="Impact">Impact</option>
-                <option value="Trebuchet MS">Trebuchet MS</option>
-                <option value="Palatino">Palatino</option>
+                {FONT_FAMILY_PROPERTY.map((family) => (
+                  <option key={family.value} value={family.value}>
+                    {family.label}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -302,18 +300,20 @@ function TextComponent({
       )}
 
       {text.length > 0 && (
-        <div className="text-list">
+        <div className={CLASSNAME.LAYOUT.TEXT_LIST}>
           <h4>Text Elements ({text.length})</h4>
-          <div className="text-items">
+          <div className={CLASSNAME.LAYOUT.TEXT_ITEMS}>
             {text.map((textItem) => (
               <div
                 key={textItem.id}
-                className={`text-item ${
-                  selectedTextId === textItem.id ? "selected" : ""
+                className={`${CLASSNAME.LAYOUT.TEXT_ITEM} ${
+                  selectedTextId === textItem.id
+                    ? CLASSNAME.LAYOUT.SELECTED
+                    : CLASSNAME.EMPTY
                 }`}
                 onClick={() => handleTextClick(textItem.id)}
               >
-                <div className="text-info">
+                <div className={CLASSNAME.LAYOUT.TEXT_INFO}>
                   <small>
                     {textItem.text} <br /> {textItem.fontSize}px •{"  "}
                     {textItem.fontStyle}

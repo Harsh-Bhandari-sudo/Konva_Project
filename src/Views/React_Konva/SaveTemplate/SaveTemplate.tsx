@@ -1,4 +1,7 @@
+// constants
 import { SaveTemplateProps } from "./types";
+import CLASSNAME from "../../../Shared/className";
+import TEXT from "../../../Shared/text";
 
 function SaveTemplate({
   templateName,
@@ -7,23 +10,23 @@ function SaveTemplate({
   isLoading,
 }: SaveTemplateProps) {
   return (
-    <div className="save-template-container">
-      <div className="save-form">
+    <div className={CLASSNAME.LAYOUT.SAVE_TEMPLATE_CONTAINER}>
+      <div className={CLASSNAME.LAYOUT.SAVE_FORM}>
         <input
           type="text"
-          placeholder="Enter template name"
+          placeholder={TEXT.PLACEHOLDER.ENTER_TEMPLATE_NAME}
           value={templateName}
           onChange={(e) => setTemplateName(e.target.value)}
-          className="template-name-input"
+          className={CLASSNAME.INPUT.TEMPLATE_NAME_INPUT}
           maxLength={50}
         />
         <button
           type="button"
           onClick={handleSaveTemplate}
           disabled={isLoading || !templateName.trim()}
-          className="save-btn"
+          className={CLASSNAME.BUTTON.SAVE_BTN}
         >
-          {isLoading ? "Saving..." : "Save Template"}
+          {isLoading ? TEXT.BUTTON.SAVING : TEXT.BUTTON.SAVE_TEMPLATE}
         </button>
       </div>
     </div>
