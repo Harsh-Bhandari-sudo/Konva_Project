@@ -1,4 +1,3 @@
-
 const TEXT = {
   HEADER: {
     COLOR: "Color",

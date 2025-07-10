@@ -1,8 +1,8 @@
-import '../../DynamicCss/CustomizeImage/CustomizeImage.css';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Stage as KonvaStage } from 'konva/lib/Stage';
-import Konva from 'konva';
-import { useState, useRef, useEffect } from 'react';
+import "../../DynamicCss/CustomizeImage/CustomizeImage.css";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Stage as KonvaStage } from "konva/lib/Stage";
+import Konva from "konva";
+import { useState, useRef, useEffect } from "react";
 import {
   Rect,
   Circle,
@@ -11,27 +11,27 @@ import {
   Ellipse,
   Image as KonvaImage,
   Text as KonvaText,
-} from 'react-konva';
-import { ColorResult } from '@hello-pangea/color-picker';
-import { KonvaEventObject } from 'konva/lib/Node';
+} from "react-konva";
+import { ColorResult } from "@hello-pangea/color-picker";
+import { KonvaEventObject } from "konva/lib/Node";
 import {
   saveTemplate,
   listTemplates,
   TemplateData,
   getTemplate,
-} from '../firebase';
-import { FontFamily } from '../TextComponent/types';
-import { Template } from '../TemplateContainer/types';
-import { ShapeData, CardImage, TextState } from '../types';
-import { sortByZIndex, handleDownload } from '../utils';
-import TextComponent from '../TextComponent/TextComponent';
-import ImageComponent from '../ImageComponent/ImageComponent';
-import ShapeComponent from '../ShapeComponent/ShapeComponent';
-import SaveTemplate from '../SaveTemplate/SaveTemplate';
-import TemplateContainer from '../TemplateContainer/TemplateContainer';
-import ColorComponent from '../ColorComponent/ColorComponent';
-import RenderImage from '../RenderComponent/RenderComponent';
-import FilterButtons from '../FilterButtons/FilterButtons';
+} from "../firebase";
+import { FontFamily } from "../TextComponent/types";
+import { Template } from "../TemplateContainer/types";
+import { ShapeData, CardImage, TextState } from "../types";
+import { sortByZIndex, handleDownload } from "../utils";
+import TextComponent from "../TextComponent/TextComponent";
+import ImageComponent from "../ImageComponent/ImageComponent";
+import ShapeComponent from "../ShapeComponent/ShapeComponent";
+import SaveTemplate from "../SaveTemplate/SaveTemplate";
+import TemplateContainer from "../TemplateContainer/TemplateContainer";
+import ColorComponent from "../ColorComponent/ColorComponent";
+import RenderImage from "../RenderComponent/RenderComponent";
+import FilterButtons from "../FilterButtons/FilterButtons";
 
 type TemplateListItem = {
   name: string;
@@ -45,22 +45,22 @@ function CardWrapper() {
   const [size] = useState(selectedSize || { height: 700, width: 600 });
 
   const [templates, setTemplates] = useState<TemplateListItem[]>([]);
-  const [templateName, setTemplateName] = useState('');
+  const [templateName, setTemplateName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const [text, setText] = useState<TextState[]>([]);
   const [backgroundImage, setBackgroundImage] =
     useState<HTMLImageElement | null>(null);
-  const [selectedColor, setSelectedColor] = useState('#ffffff');
+  const [selectedColor, setSelectedColor] = useState("#ffffff");
   const [activeFilter, setActiveFilter] = useState<
-    | 'color'
-    | 'shape'
-    | 'image'
-    | 'text'
-    | 'download'
-    | 'save'
-    | 'template'
-    | 'size'
+    | "color"
+    | "shape"
+    | "image"
+    | "text"
+    | "download"
+    | "save"
+    | "template"
+    | "size"
     | null
   >(null);
   const [shapes, setShapes] = useState<ShapeData[]>([]);
@@ -68,8 +68,8 @@ function CardWrapper() {
   const [selectedShapeId, setSelectedShapeId] = useState<string | null>(null);
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
   const [selectedTextId, setSelectedTextId] = useState<string | null>(null);
-  const [shapeColor, setShapeColor] = useState('#ff0000');
-  const [strokeColor, setStrokeColor] = useState('#000000');
+  const [shapeColor, setShapeColor] = useState("#ff0000");
+  const [strokeColor, setStrokeColor] = useState("#000000");
   const [strokeWidth, setStrokeWidth] = useState(2);
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -77,11 +77,11 @@ function CardWrapper() {
     null
   );
 
-  const [textInput, setTextInput] = useState('');
+  const [textInput, setTextInput] = useState("");
   const [textFontSize, setTextFontSize] = useState(24);
-  const [textFontFamily, setTextFontFamily] = useState('Arial');
-  const [textFontWeight, setTextFontWeight] = useState('normal');
-  const [textColor, setTextColor] = useState('#000000');
+  const [textFontFamily, setTextFontFamily] = useState("Arial");
+  const [textFontWeight, setTextFontWeight] = useState("normal");
+  const [textColor, setTextColor] = useState("#000000");
 
   const generateThumbnail = (
     stageRef: React.RefObject<KonvaStage>
@@ -100,7 +100,7 @@ function CardWrapper() {
       const tempStage = new Konva.Stage({
         width: thumbnailWidth,
         height: thumbnailHeight,
-        container: document.createElement('div'),
+        container: document.createElement("div"),
       });
 
       const originalLayer = stage.children[0];
@@ -120,7 +120,7 @@ function CardWrapper() {
 
       return dataURL;
     } catch (error) {
-      console.error('Error generating thumbnail:', error);
+      console.error("Error generating thumbnail:", error);
       return null;
     }
   };
@@ -130,12 +130,12 @@ function CardWrapper() {
       const templateList = await listTemplates();
       setTemplates(templateList);
     } catch (error) {
-      console.error('Error loading templates:', error);
+      console.error("Error loading templates:", error);
     }
   };
 
   useEffect(() => {
-    if (activeFilter === 'template') {
+    if (activeFilter === "template") {
       loadTemplates();
     }
   }, [activeFilter]);
@@ -179,7 +179,7 @@ function CardWrapper() {
       setSelectedImageId(null);
       setSelectedTextId(null);
     } catch (error) {
-      console.error('Error loading template:', error);
+      console.error("Error loading template:", error);
       alert(
         `Failed to load template: ${
           error instanceof Error ? error.message : String(error)
@@ -192,7 +192,7 @@ function CardWrapper() {
 
   const handleSaveTemplate = async () => {
     if (!templateName.trim()) {
-      alert('Please enter a template name');
+      alert("Please enter a template name");
       return;
     }
 
@@ -216,15 +216,15 @@ function CardWrapper() {
         frameSize: size,
         createdAt: new Date().toISOString(),
       };
-      console.log('template name in firebase', templateName);
+      console.log("template name in firebase", templateName);
       await saveTemplate(templateName, templateData);
 
-      alert('Template saved successfully!');
-      setTemplateName('');
+      alert("Template saved successfully!");
+      setTemplateName("");
       loadTemplates();
     } catch (error) {
-      console.error('Error saving template:', error);
-      alert('Failed to save template');
+      console.error("Error saving template:", error);
+      alert("Failed to save template");
     } finally {
       setIsLoading(false);
     }
@@ -297,10 +297,10 @@ function CardWrapper() {
     setSelectedTextId(newText.id);
     setSelectedShapeId(null);
     setSelectedImageId(null);
-    setTextInput('');
+    setTextInput("");
   };
 
-  const addShape = (type: ShapeData['type']) => {
+  const addShape = (type: ShapeData["type"]) => {
     const maxZIndex = Math.max(
       ...shapes.map((s) => s.zIndex),
       ...images.map((i) => i.zIndex),
@@ -313,8 +313,8 @@ function CardWrapper() {
       type,
       x: 20,
       y: 20,
-      width: type === 'circle' ? 100 : 100,
-      height: type === 'circle' ? 100 : 100,
+      width: type === "circle" ? 100 : 100,
+      height: type === "circle" ? 100 : 100,
       fill: shapeColor,
       stroke: strokeColor,
       strokeWidth,
@@ -390,7 +390,7 @@ function CardWrapper() {
     setSelectedShapeId(shapeId);
     setSelectedImageId(null);
     setSelectedTextId(null);
-    setActiveFilter('shape');
+    setActiveFilter("shape");
     const shape = shapes.find((s) => s.id === shapeId);
     if (shape) {
       setShapeColor(shape.fill);
@@ -408,7 +408,7 @@ function CardWrapper() {
     setSelectedImageId(imageId);
     setSelectedShapeId(null);
     setSelectedTextId(null);
-    setActiveFilter('image');
+    setActiveFilter("image");
   };
 
   const handleTextClick = (textId: string) => {
@@ -425,7 +425,7 @@ function CardWrapper() {
     setSelectedTextId(textId);
     setSelectedShapeId(null);
     setSelectedImageId(null);
-    setActiveFilter('text');
+    setActiveFilter("text");
     const textItem = text.find((t) => t.id === textId);
     if (textItem) {
       setTextFontSize(textItem.fontSize);
@@ -451,18 +451,18 @@ function CardWrapper() {
         if (!shape) return;
 
         switch (property) {
-          case 'width':
-            if (shape.type === 'circle') {
+          case "width":
+            if (shape.type === "circle") {
               (node as Konva.Circle).radius(Number(value) / 2);
-            } else if (shape.type === 'ellipse') {
+            } else if (shape.type === "ellipse") {
               (node as Konva.Ellipse).radiusX(Number(value) / 2);
             } else {
               node.width(Number(value));
             }
             node.scaleX(1);
             break;
-          case 'height':
-            if (shape.type === 'ellipse') {
+          case "height":
+            if (shape.type === "ellipse") {
               (node as Konva.Ellipse).radiusY(Number(value) / 2);
             } else {
               node.height(Number(value));
@@ -486,10 +486,10 @@ function CardWrapper() {
         `#${selectedImageId}`
       ) as Konva.Image;
       if (node) {
-        if (property === 'width') {
+        if (property === "width") {
           node.width(value);
           node.scaleX(1);
-        } else if (property === 'height') {
+        } else if (property === "height") {
           node.height(value);
           node.scaleY(1);
         }
@@ -509,7 +509,7 @@ function CardWrapper() {
             : textItem
         )
       );
-      if (property === 'fontSize') {
+      if (property === "fontSize") {
         setTextFontSize(Number(value));
       }
     }
@@ -523,11 +523,11 @@ function CardWrapper() {
     );
 
     if (selectedShapeId) {
-      updateShapeProperty('zIndex', maxZIndex + 1);
+      updateShapeProperty("zIndex", maxZIndex + 1);
     } else if (selectedImageId) {
-      updateImageProperty('zIndex', maxZIndex + 1);
+      updateImageProperty("zIndex", maxZIndex + 1);
     } else if (selectedTextId) {
-      updateTextProperty('zIndex', maxZIndex + 1);
+      updateTextProperty("zIndex", maxZIndex + 1);
     }
   };
 
@@ -540,11 +540,11 @@ function CardWrapper() {
     );
 
     if (selectedShapeId) {
-      updateShapeProperty('zIndex', minZIndex - 1);
+      updateShapeProperty("zIndex", minZIndex - 1);
     } else if (selectedImageId) {
-      updateImageProperty('zIndex', minZIndex - 1);
+      updateImageProperty("zIndex", minZIndex - 1);
     } else if (selectedTextId) {
-      updateTextProperty('zIndex', minZIndex - 1);
+      updateTextProperty("zIndex", minZIndex - 1);
     }
   };
 
@@ -552,17 +552,17 @@ function CardWrapper() {
     if (selectedShapeId) {
       const currentShape = shapes.find((s) => s.id === selectedShapeId);
       if (currentShape) {
-        updateShapeProperty('zIndex', currentShape.zIndex + 1);
+        updateShapeProperty("zIndex", currentShape.zIndex + 1);
       }
     } else if (selectedImageId) {
       const currentImage = images.find((i) => i.id === selectedImageId);
       if (currentImage) {
-        updateImageProperty('zIndex', currentImage.zIndex + 1);
+        updateImageProperty("zIndex", currentImage.zIndex + 1);
       }
     } else if (selectedTextId) {
       const currentText = text.find((t) => t.id === selectedTextId);
       if (currentText) {
-        updateTextProperty('zIndex', currentText.zIndex + 1);
+        updateTextProperty("zIndex", currentText.zIndex + 1);
       }
     }
   };
@@ -571,17 +571,17 @@ function CardWrapper() {
     if (selectedShapeId) {
       const currentShape = shapes.find((s) => s.id === selectedShapeId);
       if (currentShape) {
-        updateShapeProperty('zIndex', currentShape.zIndex - 1);
+        updateShapeProperty("zIndex", currentShape.zIndex - 1);
       }
     } else if (selectedImageId) {
       const currentImage = images.find((i) => i.id === selectedImageId);
       if (currentImage) {
-        updateImageProperty('zIndex', currentImage.zIndex - 1);
+        updateImageProperty("zIndex", currentImage.zIndex - 1);
       }
     } else if (selectedTextId) {
       const currentText = text.find((t) => t.id === selectedTextId);
       if (currentText) {
-        updateTextProperty('zIndex', currentText.zIndex - 1);
+        updateTextProperty("zIndex", currentText.zIndex - 1);
       }
     }
   };
@@ -614,22 +614,22 @@ function CardWrapper() {
       data: {
         ...item.data,
         frameSize: item.data.frameSize || { width: 800, height: 600 }, // Provide default
-        thumbnail: item.data.thumbnail || '',
+        thumbnail: item.data.thumbnail || "",
       },
     };
   };
 
   const handleFileUpload = (files: FileList | null) => {
     if (!files) return;
-    if (activeFilter === 'color') {
+    if (activeFilter === "color") {
       const file = files[0];
-      if (file.type.startsWith('image/')) {
+      if (file.type.startsWith("image/")) {
         const reader = new FileReader();
         reader.onload = (e) => {
           const img = new Image();
           img.onload = () => {
             setBackgroundImage(img);
-            setSelectedColor('transparent');
+            setSelectedColor("transparent");
           };
           img.src = e.target?.result as string;
           setBackgroundImageUrl(e.target?.result as string);
@@ -640,7 +640,7 @@ function CardWrapper() {
     }
 
     Array.from(files).forEach((file) => {
-      if (file.type.startsWith('image/')) {
+      if (file.type.startsWith("image/")) {
         const reader = new FileReader();
         reader.onload = (e) => {
           const img = new Image();
@@ -699,11 +699,11 @@ function CardWrapper() {
     const commonProps = {
       onMouseEnter: () => {
         const container = stageRef.current?.getStage().container();
-        if (container) container.style.cursor = 'pointer';
+        if (container) container.style.cursor = "pointer";
       },
       onMouseLeave: () => {
         const container = stageRef.current?.getStage().container();
-        if (container) container.style.cursor = 'default';
+        if (container) container.style.cursor = "default";
       },
       id: shape.id,
       key: shape.id,
@@ -718,7 +718,7 @@ function CardWrapper() {
         handleShapeDragEnd(e, shape.id),
       onTransformEnd: () => {
         const node = stageRef.current?.findOne(`#${shape.id}`);
-        console.log('node of the shape', node);
+        console.log("node of the shape", node);
         if (node) {
           const updates: Partial<ShapeData> = {
             x: node.x(),
@@ -726,12 +726,12 @@ function CardWrapper() {
             rotation: node.rotation(),
           };
           switch (shape.type) {
-            case 'rectangle':
-            case 'ellipse':
+            case "rectangle":
+            case "ellipse":
               updates.width = Math.max(10, node.width() * node.scaleX());
               updates.height = Math.max(10, node.height() * node.scaleY());
               break;
-            case 'circle':
+            case "circle":
               const circle = node as Konva.Circle;
               updates.width = Math.max(10, circle.radius() * 2 * node.scaleX());
               updates.height = Math.max(
@@ -739,8 +739,8 @@ function CardWrapper() {
                 circle.radius() * 2 * node.scaleY()
               );
               break;
-            case 'triangle':
-            case 'star':
+            case "triangle":
+            case "star":
               updates.width = Math.max(10, shape.width * node.scaleX());
               updates.height = Math.max(10, shape.height * node.scaleY());
               break;
@@ -757,17 +757,17 @@ function CardWrapper() {
     };
 
     switch (shape.type) {
-      case 'rectangle':
+      case "rectangle":
         return (
           <Rect {...commonProps} width={shape.width} height={shape.height} />
         );
-      case 'circle':
+      case "circle":
         return <Circle {...commonProps} radius={shape.width / 2} />;
-      case 'triangle':
+      case "triangle":
         return (
           <RegularPolygon {...commonProps} sides={3} radius={shape.width / 2} />
         );
-      case 'star':
+      case "star":
         return (
           <Star
             {...commonProps}
@@ -776,7 +776,7 @@ function CardWrapper() {
             outerRadius={shape.width / 2}
           />
         );
-      case 'ellipse':
+      case "ellipse":
         return (
           <Ellipse
             {...commonProps}
@@ -800,7 +800,7 @@ function CardWrapper() {
         width={imageData.width}
         height={imageData.height}
         draggable
-        stroke={isSelected ? '#00ff00' : undefined}
+        stroke={isSelected ? "#00ff00" : undefined}
         strokeWidth={isSelected ? 3 : undefined}
         onDragEnd={(e: KonvaEventObject<DragEvent>) =>
           handleImageDragEnd(e, imageData.id)
@@ -867,7 +867,7 @@ function CardWrapper() {
           const node = stageRef.current?.findOne(
             `#${textData.id}`
           ) as Konva.Text;
-          console.log('node of text');
+          console.log("node of text");
           if (node) {
             const scaleX = node.scaleX();
             const scaleY = node.scaleY();
@@ -875,14 +875,14 @@ function CardWrapper() {
             const scaleFactor = Math.max(scaleX, scaleY);
             const newFontSize = Math.max(8, textData.fontSize * scaleFactor);
 
-            updateTextProperty('x', node.x());
-            updateTextProperty('y', node.y());
-            updateTextProperty('width', node.textWidth);
-            updateTextProperty('height', node.textHeight);
+            updateTextProperty("x", node.x());
+            updateTextProperty("y", node.y());
+            updateTextProperty("width", node.textWidth);
+            updateTextProperty("height", node.textHeight);
 
-            updateTextProperty('fontSize', newFontSize);
-            updateTextProperty('scaleX', 1);
-            updateTextProperty('scaleY', 1);
+            updateTextProperty("fontSize", newFontSize);
+            updateTextProperty("scaleX", 1);
+            updateTextProperty("scaleY", 1);
 
             if (selectedTextId === textData.id) {
               setTextFontSize(newFontSize);
@@ -958,7 +958,7 @@ function CardWrapper() {
             <button
               type="button"
               className="size-dimensions"
-              onClick={() => navigate('/chosen-template')}
+              onClick={() => navigate("/chosen-template")}
             >
               <span className="size-name">{size?.name}</span>
               <span className="dimensions">
@@ -976,10 +976,10 @@ function CardWrapper() {
               <div className="size-dimensions">
                 <div
                   style={{
-                    width: '50px',
-                    height: '50px',
-                    borderRadius: '36px',
-                    border: '1px solid grey',
+                    width: "50px",
+                    height: "50px",
+                    borderRadius: "36px",
+                    border: "1px solid grey",
                     backgroundColor: selectedColor,
                   }}
                 />
@@ -991,7 +991,7 @@ function CardWrapper() {
       ) : (
         <div className="options">
           <h2 className="design-options">Design</h2>
-          {activeFilter === 'color' && (
+          {activeFilter === "color" && (
             <ColorComponent
               selectedColor={selectedColor}
               handleColorChange={handleColorChange}
@@ -1001,7 +1001,7 @@ function CardWrapper() {
               setSelectedColor={setSelectedColor}
             />
           )}
-          {activeFilter === 'shape' && (
+          {activeFilter === "shape" && (
             <ShapeComponent
               selectedImageId={selectedImageId}
               deleteSelectedShape={deleteSelectedShape}
@@ -1021,7 +1021,7 @@ function CardWrapper() {
             />
           )}
           {/* CUSTOMIZE IMAGE */}
-          {activeFilter === 'image' && (
+          {activeFilter === "image" && (
             <ImageComponent
               handleImageClick={handleImageClick}
               selectedImageId={selectedImageId}
@@ -1042,7 +1042,7 @@ function CardWrapper() {
             />
           )}
           {/* CUSTOMIZE TEXT */}
-          {activeFilter === 'text' && (
+          {activeFilter === "text" && (
             <TextComponent
               deleteSelectedText={deleteSelectedText}
               handleTextClick={handleTextClick}
@@ -1068,7 +1068,7 @@ function CardWrapper() {
               handleTextColorChange={handleTextColorChange}
             />
           )}
-          {activeFilter === 'save' && (
+          {activeFilter === "save" && (
             <SaveTemplate
               templateName={templateName}
               setTemplateName={setTemplateName}
@@ -1078,7 +1078,7 @@ function CardWrapper() {
               stageRef={stageRef}
             />
           )}
-          {activeFilter === 'template' && (
+          {activeFilter === "template" && (
             <TemplateContainer
               isLoading={isLoading}
               templates={templates.map(convertTemplateListItemToTemplate)}

@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { combineReducers } from 'redux';
+import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers } from "redux";
 import {
   persistStore,
   persistReducer,
@@ -9,17 +9,17 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { setupListeners } from '@reduxjs/toolkit/query';
-import api from '../Services/Api/api';
-import common from './Common';
-import loader from './Loader';
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { setupListeners } from "@reduxjs/toolkit/query";
+import api from "../Services/Api/api";
+import common from "./Common";
+import loader from "./Loader";
 
 const rootPersistConfig = {
-  key: 'root',
+  key: "root",
   storage,
-  whitelist: ['common'],
+  whitelist: ["common"],
 };
 const reducers = combineReducers({
   common,

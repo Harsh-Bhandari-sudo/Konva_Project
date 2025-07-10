@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { unstable_useBlocker as useBlocker } from 'react-router-dom';
+import { useEffect } from "react";
+import { unstable_useBlocker as useBlocker } from "react-router-dom";
 
 interface PromptProps {
   when: boolean;
@@ -34,14 +34,14 @@ function Prompt({ when, message }: PromptProps) {
     };
 
     if (when) {
-      window.addEventListener('beforeunload', handleBeforeUnload);
+      window.addEventListener("beforeunload", handleBeforeUnload);
     } else {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     }
 
     // Cleanup on component unmount
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [when, message]);
 

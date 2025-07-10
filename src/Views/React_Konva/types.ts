@@ -1,4 +1,4 @@
-import { FontFamily } from './TextComponent/types';
+import { FontFamily } from "./TextComponent/types";
 
 export interface CardImage {
   id: string;
@@ -21,7 +21,7 @@ export interface CardImage {
 // Shape Data Interface
 export interface ShapeData {
   id: string;
-  type: 'rectangle' | 'circle' | 'triangle' | 'star' | 'ellipse';
+  type: "rectangle" | "circle" | "triangle" | "star" | "ellipse";
   x: number;
   y: number;
   width: number;
@@ -63,7 +63,7 @@ export interface TextState {
 // Template Data Interface
 export interface TemplateData {
   shapes: ShapeData[];
-  images: Omit<ImageData, 'imageElement'>[]; // Exclude imageElement for Firestore
+  images: Omit<ImageData, "imageElement">[]; // Exclude imageElement for Firestore
   text: TextState[];
   background: {
     color: string;

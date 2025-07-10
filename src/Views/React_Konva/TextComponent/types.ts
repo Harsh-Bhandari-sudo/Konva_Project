@@ -1,20 +1,20 @@
-import Konva from 'konva';
-import { ColorResult } from '@hello-pangea/color-picker';
-import { TextState } from '../types';
+import Konva from "konva";
+import { ColorResult } from "@hello-pangea/color-picker";
+import { TextState } from "../types";
 
-export type FontWeight = 'normal' | 'bold' | 'lighter' | 'bolder' | string;
+export type FontWeight = "normal" | "bold" | "lighter" | "bolder" | string;
 
 export type FontFamily =
-  | 'Arial'
-  | 'Helvetica'
-  | 'Times New Roman'
-  | 'Georgia'
-  | 'Verdana'
-  | 'Courier New'
-  | 'Comic Sans MS'
-  | 'Impact'
-  | 'Trebuchet MS'
-  | 'Palatino';
+  | "Arial"
+  | "Helvetica"
+  | "Times New Roman"
+  | "Georgia"
+  | "Verdana"
+  | "Courier New"
+  | "Comic Sans MS"
+  | "Impact"
+  | "Trebuchet MS"
+  | "Palatino";
 
 interface TextItem {
   id: string;

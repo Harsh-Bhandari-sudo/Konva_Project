@@ -1,11 +1,11 @@
-import { Helmet } from 'react-helmet-async';
-import { useLocation } from 'react-router-dom';
-import { Path, pathToRegexp } from 'path-to-regexp';
+import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
+import { Path, pathToRegexp } from "path-to-regexp";
 
-import AUTH_ROUTES from './AuthRoutes';
-import { PRIVATE_ROUTES } from './PrivateRoutes';
-import { PUBLIC_ROUTES } from './PublicRoutes';
-import { CustomRouter } from './RootRoutes';
+import AUTH_ROUTES from "./AuthRoutes";
+import { PRIVATE_ROUTES } from "./PrivateRoutes";
+import { PUBLIC_ROUTES } from "./PublicRoutes";
+import { CustomRouter } from "./RootRoutes";
 
 // eslint-disable-next-line react/prop-types
 function DocumentTitle({ isAuthenticated = false }) {
@@ -15,11 +15,11 @@ function DocumentTitle({ isAuthenticated = false }) {
   );
   const matchedRoute: CustomRouter | undefined = ROUTES.find(
     (route: CustomRouter) =>
-      route.path !== '*' &&
+      route.path !== "*" &&
       pathToRegexp(route.path as Path).test(location.pathname)
   );
 
-  const title = matchedRoute ? matchedRoute.title : '';
+  const title = matchedRoute ? matchedRoute.title : "";
   return (
     <Helmet>
       <title>{title}</title>

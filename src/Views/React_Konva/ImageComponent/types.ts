@@ -1,14 +1,14 @@
-import { RefObject } from 'react';
-import { CardImage } from '../types';
+import { RefObject } from "react";
+import { CardImage } from "../types";
 
 type ImageProperty =
-  | 'width'
-  | 'height'
-  | 'brightness'
-  | 'contrast'
-  | 'saturation'
-  | 'opacity'
-  | 'zIndex';
+  | "width"
+  | "height"
+  | "brightness"
+  | "contrast"
+  | "saturation"
+  | "opacity"
+  | "zIndex";
 
 export interface ImageComponentProps {
   handleImageClick: (imageId: string) => void;

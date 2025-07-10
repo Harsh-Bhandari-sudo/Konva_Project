@@ -1,4 +1,4 @@
-import { CustomRouter } from './RootRoutes';
+import { CustomRouter } from "./RootRoutes";
 
 const AUTH_ROUTES: Array<CustomRouter> = [
   // {

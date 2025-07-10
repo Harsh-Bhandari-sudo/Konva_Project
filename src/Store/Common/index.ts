@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const common = createSlice({
-  name: 'common',
+  name: "common",
   initialState: { token: null },
   reducers: {
     updateAuthTokenRedux: (state, action) => ({

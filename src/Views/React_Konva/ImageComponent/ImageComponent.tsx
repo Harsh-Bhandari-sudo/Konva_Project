@@ -111,7 +111,7 @@ function ImageComponent({
                   onChange={(e) =>
                     updateImageProperty(
                       "brightness",
-                      parseFloat(e.target.value),
+                      parseFloat(e.target.value)
                     )
                   }
                 />
@@ -147,7 +147,7 @@ function ImageComponent({
                   onChange={(e) =>
                     updateImageProperty(
                       "saturation",
-                      parseFloat(e.target.value),
+                      parseFloat(e.target.value)
                     )
                   }
                 />

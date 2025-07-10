@@ -25,7 +25,7 @@ export interface ShapeComponentProps {
   setStrokeWidth: (width: number) => void;
   updateShapeProperty: (
     property: keyof ShapeData,
-    value: number | string,
+    value: number | string
   ) => void;
   bringToFront: () => void;
   selectedImageId: string | number | null;

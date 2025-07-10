@@ -1,4 +1,4 @@
-import { AppLayoutProps } from '../AppLayout.d';
+import { AppLayoutProps } from "../AppLayout.d";
 
 function PublicLayout({ children }: AppLayoutProps): JSX.Element {
   return (
