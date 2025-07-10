@@ -78,7 +78,6 @@ button.card-content:focus{
 }
 
 .customize-image {
-  /* background-color: grey; */
   display: flex
 ;
   justify-content: center;

@@ -4,12 +4,12 @@ import {
   Rect,
   Transformer,
   Image as KonvaImage,
-} from 'react-konva';
-import '../../DynamicCss/CustomizeImage/CustomizeImage.css';
-import { useRef, useEffect } from 'react';
-import Konva from 'konva';
-import { ShapeData, CardImage, TextState } from '../types';
-import { RenderImageProps } from './types';
+} from "react-konva";
+import "../../DynamicCss/CustomizeImage/CustomizeImage.css";
+import { useRef, useEffect } from "react";
+import Konva from "konva";
+import { ShapeData, CardImage, TextState } from "../types";
+import { RenderImageProps } from "./types";
 
 function RenderImage({
   stageRef,
@@ -36,33 +36,32 @@ function RenderImage({
 
     if (selectedTextId) {
       transformer.anchorSize(8);
-      transformer.borderStroke('#00ff00');
+      transformer.borderStroke("#00ff00");
       transformer.borderStrokeWidth(1);
       transformer.enabledAnchors([
-        'top-left',
-        'top-right',
-        'bottom-left',
-        'bottom-right',
+        "top-left",
+        "top-right",
+        "bottom-left",
+        "bottom-right",
       ]);
       transformer.keepRatio(false);
     } else {
       transformer.anchorSize(8);
-      transformer.borderStroke('#00ff00');
+      transformer.borderStroke("#00ff00");
       transformer.borderStrokeWidth(1);
       transformer.enabledAnchors([
-        'top-left',
-        'top-center',
-        'top-right',
-        'middle-left',
-        'middle-right',
-        'bottom-left',
-        'bottom-center',
-        'bottom-right',
+        "top-left",
+        "top-center",
+        "top-right",
+        "middle-left",
+        "middle-right",
+        "bottom-left",
+        "bottom-center",
+        "bottom-right",
       ]);
       transformer.keepRatio(false);
     }
   }, [selectedTextId, selectedImageId, selectedShapeId]);
-  console.log(size);
 
   return (
     <div className="image">
@@ -91,8 +90,8 @@ function RenderImage({
             {[...shapes, ...images, ...text]
               .sort(sortByZIndex)
               .map((element) => {
-                if ('type' in element) return renderShape(element as ShapeData);
-                if ('src' in element) return renderImage(element as CardImage);
+                if ("type" in element) return renderShape(element as ShapeData);
+                if ("src" in element) return renderImage(element as CardImage);
                 return renderText(element as TextState);
               })}
 

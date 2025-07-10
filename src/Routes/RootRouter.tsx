@@ -1,17 +1,16 @@
-import { useSelector } from 'react-redux';
-import { useRoutes } from 'react-router-dom';
-import DocumentTitle from './DocumentTitle';
-import { authenticatedRoutes, guestRoutes } from './config';
-import AppLayout from '../Components/Layouts/AppLayout';
-import type { RootState } from '../Store';
+import { useSelector } from "react-redux";
+import { useRoutes } from "react-router-dom";
+import DocumentTitle from "./DocumentTitle";
+import { authenticatedRoutes, guestRoutes } from "./config";
+import AppLayout from "../Components/Layouts/AppLayout";
+import type { RootState } from "../Store";
 
 function RootRouter() {
   const guest = useRoutes(guestRoutes);
   const authenticated = useRoutes(authenticatedRoutes);
-  console.log('use route');
 
   const token = useSelector((state: RootState) => state?.common?.token);
-  const isAuthenticated = true; //! !token;
+  const isAuthenticated = true;
   return (
     <>
       <DocumentTitle isAuthenticated={isAuthenticated} />

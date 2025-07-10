@@ -1,7 +1,7 @@
-import { SketchPicker } from '@hello-pangea/color-picker';
-import { useEffect, useRef } from 'react';
-import Konva from 'konva';
-import { TextComponentProps, FontFamily, FontWeight } from './types';
+import { SketchPicker } from "@hello-pangea/color-picker";
+import { useEffect, useRef } from "react";
+import Konva from "konva";
+import { TextComponentProps, FontFamily, FontWeight } from "./types";
 
 function TextComponent({
   deleteSelectedText,
@@ -61,13 +61,13 @@ function TextComponent({
 
         // Configure transformer specifically for text
         transformerRef.current.anchorSize(8);
-        transformerRef.current.borderStroke('#00ff00');
+        transformerRef.current.borderStroke("#00ff00");
         transformerRef.current.borderStrokeWidth(1);
         transformerRef.current.enabledAnchors([
-          'top-center',
-          'middle-right',
-          'bottom-center',
-          'middle-left',
+          "top-center",
+          "middle-right",
+          "bottom-center",
+          "middle-left",
         ]);
         transformerRef.current.resizeEnabled(true);
         transformerRef.current.getLayer()?.batchDraw();
@@ -91,7 +91,7 @@ function TextComponent({
             onChange={(e) => setTextInput(e.target.value)}
             placeholder="Type your text here..."
             onKeyPress={(e) => {
-              if (e.key === 'Enter' && textInput.trim()) {
+              if (e.key === "Enter" && textInput.trim()) {
                 addText();
               }
             }}
@@ -120,7 +120,7 @@ function TextComponent({
                 const value = parseInt(e.target.value);
                 setTextFontSize(value);
                 if (selectedTextId) {
-                  updateTextProperty('fontSize', value);
+                  updateTextProperty("fontSize", value);
                 }
               }}
             />
@@ -136,7 +136,7 @@ function TextComponent({
             onChange={(e) => {
               setTextFontWeight(e.target.value as FontWeight);
               if (selectedTextId) {
-                updateTextProperty('fontStyle', e.target.value);
+                updateTextProperty("fontStyle", e.target.value);
               }
             }}
           >
@@ -155,7 +155,7 @@ function TextComponent({
             onChange={(e) => {
               setTextFontFamily(e.target.value as FontFamily);
               if (selectedTextId) {
-                updateTextProperty('fontFamily', e.target.value);
+                updateTextProperty("fontFamily", e.target.value);
               }
             }}
           >
@@ -190,7 +190,7 @@ function TextComponent({
             <input
               type="text"
               value={selectedText.text}
-              onChange={(e) => updateTextProperty('text', e.target.value)}
+              onChange={(e) => updateTextProperty("text", e.target.value)}
               placeholder="Edit text content..."
             />
           </div>
@@ -207,7 +207,7 @@ function TextComponent({
                   onChange={(e) => {
                     const value = parseInt(e.target.value);
                     setTextFontSize(value);
-                    updateTextProperty('fontSize', value);
+                    updateTextProperty("fontSize", value);
                   }}
                 />
                 <span>px</span>
@@ -220,7 +220,7 @@ function TextComponent({
                 className="font-weight-property"
                 value={selectedText.fontStyle}
                 onChange={(e) =>
-                  updateTextProperty('fontStyle', e.target.value)
+                  updateTextProperty("fontStyle", e.target.value)
                 }
               >
                 <option value="normal">Normal</option>
@@ -235,7 +235,7 @@ function TextComponent({
               <select
                 value={selectedText.fontFamily}
                 onChange={(e) =>
-                  updateTextProperty('fontFamily', e.target.value)
+                  updateTextProperty("fontFamily", e.target.value)
                 }
               >
                 <option value="Arial">Arial</option>
@@ -255,13 +255,21 @@ function TextComponent({
           <div className="z-index-controls">
             <h4>Layer Controls</h4>
             <div className="z-index-buttons">
-              <button type="button"onClick={bringToFront} className="layer-btn">
+              <button
+                type="button"
+                onClick={bringToFront}
+                className="layer-btn"
+              >
                 Bring to Front
               </button>
               <button type="button" onClick={moveForward} className="layer-btn">
                 Move Forward
               </button>
-              <button  type="button" onClick={moveBackward} className="layer-btn">
+              <button
+                type="button"
+                onClick={moveBackward}
+                className="layer-btn"
+              >
                 Move Backward
               </button>
               <button type="button" onClick={sendToBack} className="layer-btn">
@@ -274,15 +282,19 @@ function TextComponent({
                 type="number"
                 value={selectedText.zIndex}
                 onChange={(e) =>
-                  updateTextProperty('zIndex', parseInt(e.target.value))
+                  updateTextProperty("zIndex", parseInt(e.target.value))
                 }
-                style={{ width: '60px', marginLeft: '8px' }}
+                style={{ width: "60px", marginLeft: "8px" }}
               />
             </div>
           </div>
 
           <div className="delete-text">
-            <button type="button" onClick={deleteSelectedText} className="delete-btn">
+            <button
+              type="button"
+              onClick={deleteSelectedText}
+              className="delete-btn"
+            >
               Delete Text
             </button>
           </div>
@@ -297,13 +309,13 @@ function TextComponent({
               <div
                 key={textItem.id}
                 className={`text-item ${
-                  selectedTextId === textItem.id ? 'selected' : ''
+                  selectedTextId === textItem.id ? "selected" : ""
                 }`}
                 onClick={() => handleTextClick(textItem.id)}
               >
                 <div className="text-info">
                   <small>
-                    {textItem.text} <br /> {textItem.fontSize}px •{'  '}
+                    {textItem.text} <br /> {textItem.fontSize}px •{"  "}
                     {textItem.fontStyle}
                   </small>
                 </div>

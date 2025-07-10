@@ -1,6 +1,5 @@
 import '../../DynamicCss/CustomizeImage/CustomizeImage.css';
 import { useNavigate, useLocation } from 'react-router-dom';
-
 import { Stage as KonvaStage } from 'konva/lib/Stage';
 import Konva from 'konva';
 import { useState, useRef, useEffect } from 'react';
@@ -145,16 +144,6 @@ function CardWrapper() {
     setIsLoading(true);
     try {
       const templateData = await getTemplate(templateName);
-      console.log('template data', templateData);
-
-      // if (templateWidth != size.width && templateHeight != size.height) {
-      //   return;
-      // }
-
-      // if (templateData.frameSize) {
-      //   setSize(templateData.frameSize);
-      // }
-
       setShapes(templateData.shapes);
       setText(templateData.text);
 
@@ -707,7 +696,6 @@ function CardWrapper() {
   };
 
   const renderShape = (shape: ShapeData) => {
-    console.log('shape data', shape);
     const commonProps = {
       onMouseEnter: () => {
         const container = stageRef.current?.getStage().container();

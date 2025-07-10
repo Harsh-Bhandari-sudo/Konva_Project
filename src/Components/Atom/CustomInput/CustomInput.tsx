@@ -1,6 +1,12 @@
-import React from 'react';
+import React from "react";
 
-type InputType = 'text' | 'password' | 'email' | 'number';
+// constants
+import CLASSNAME from "../../../Shared/className";
+import TEXT from "../../../Shared/text";
+
+// interface
+type InputType = "text" | "password" | "email" | "number";
+
 interface InputProps {
   type?: InputType;
   value?: string;
@@ -8,7 +14,8 @@ interface InputProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   defaultValue?: string;
 }
-const Input: React.FC<InputProps> = ({
+
+const CustomInput: React.FC<InputProps> = ({
   value,
   name,
   onChange,
@@ -16,8 +23,9 @@ const Input: React.FC<InputProps> = ({
   defaultValue,
 }) => {
   return (
-    <div className="input-container">
+    <div className={CLASSNAME.LAYOUT.INPUT_CONTAINER}>
       <input
+        title={TEXT.TITLE.INPUT}
         type={type}
         value={value}
         name={name}
@@ -27,4 +35,5 @@ const Input: React.FC<InputProps> = ({
     </div>
   );
 };
-export default Input;
+
+export default CustomInput;

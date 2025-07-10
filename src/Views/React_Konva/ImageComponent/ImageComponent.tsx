@@ -1,4 +1,4 @@
-import { ImageComponentProps } from './types';
+import { ImageComponentProps } from "./types";
 
 function ImageComponent({
   handleImageClick,
@@ -21,7 +21,7 @@ function ImageComponent({
   return (
     <div className="image-upload-section">
       <div
-        className={`drag-drop-area ${dragOver ? 'drag-over' : ''}`}
+        className={`drag-drop-area ${dragOver ? "drag-over" : ""}`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
@@ -30,8 +30,7 @@ function ImageComponent({
         <div className="drag-drop-content">
           <p>Add your media</p>
           <span>You can upload your media from your device.</span>
-          <button   type="button">
-          
+          <button type="button">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -57,7 +56,7 @@ function ImageComponent({
         type="file"
         accept="image/*"
         multiple
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         onChange={(e) => handleFileUpload(e.target.files)}
       />
 
@@ -75,7 +74,7 @@ function ImageComponent({
                   min="20"
                   value={selectedImage.width}
                   onChange={(e) =>
-                    updateImageProperty('width', parseInt(e.target.value))
+                    updateImageProperty("width", parseInt(e.target.value))
                   }
                 />
                 <span>px</span>
@@ -91,7 +90,7 @@ function ImageComponent({
                   min="20"
                   value={selectedImage.height}
                   onChange={(e) =>
-                    updateImageProperty('height', parseInt(e.target.value))
+                    updateImageProperty("height", parseInt(e.target.value))
                   }
                 />
                 <span>px</span>
@@ -111,8 +110,8 @@ function ImageComponent({
                   value={selectedImage.brightness}
                   onChange={(e) =>
                     updateImageProperty(
-                      'brightness',
-                      parseFloat(e.target.value)
+                      "brightness",
+                      parseFloat(e.target.value),
                     )
                   }
                 />
@@ -129,7 +128,7 @@ function ImageComponent({
                   step="0.1"
                   value={selectedImage.contrast}
                   onChange={(e) =>
-                    updateImageProperty('contrast', parseFloat(e.target.value))
+                    updateImageProperty("contrast", parseFloat(e.target.value))
                   }
                 />
                 <span>{selectedImage.contrast.toFixed(1)}</span>
@@ -147,8 +146,8 @@ function ImageComponent({
                   value={selectedImage.saturation}
                   onChange={(e) =>
                     updateImageProperty(
-                      'saturation',
-                      parseFloat(e.target.value)
+                      "saturation",
+                      parseFloat(e.target.value),
                     )
                   }
                 />
@@ -166,7 +165,7 @@ function ImageComponent({
                   step="0.1"
                   value={selectedImage.opacity}
                   onChange={(e) =>
-                    updateImageProperty('opacity', parseFloat(e.target.value))
+                    updateImageProperty("opacity", parseFloat(e.target.value))
                   }
                 />
                 <span>{selectedImage.opacity.toFixed(1)}</span>
@@ -177,13 +176,21 @@ function ImageComponent({
           <div className="z-index-controls">
             <h4>Layer Controls</h4>
             <div className="z-index-buttons">
-              <button  type="button" onClick={bringToFront} className="layer-btn">
+              <button
+                type="button"
+                onClick={bringToFront}
+                className="layer-btn"
+              >
                 Bring to Front
               </button>
-              <button  type="button" onClick={moveForward} className="layer-btn">
+              <button type="button" onClick={moveForward} className="layer-btn">
                 Move Forward
               </button>
-              <button type="button" onClick={moveBackward} className="layer-btn">
+              <button
+                type="button"
+                onClick={moveBackward}
+                className="layer-btn"
+              >
                 Move Backward
               </button>
               <button type="button" onClick={sendToBack} className="layer-btn">
@@ -196,15 +203,19 @@ function ImageComponent({
                 type="number"
                 value={selectedImage.zIndex}
                 onChange={(e) =>
-                  updateImageProperty('zIndex', parseInt(e.target.value))
+                  updateImageProperty("zIndex", parseInt(e.target.value))
                 }
-                style={{ width: '60px', marginLeft: '8px' }}
+                style={{ width: "60px", marginLeft: "8px" }}
               />
             </div>
           </div>
 
           <div className="delete-text">
-            <button type="button" onClick={deleteSelectedImage} className="delete-btn">
+            <button
+              type="button"
+              onClick={deleteSelectedImage}
+              className="delete-btn"
+            >
               Delete Image
             </button>
           </div>
@@ -219,7 +230,7 @@ function ImageComponent({
               <div
                 key={image.id}
                 className={`image-thumbnail ${
-                  selectedImageId === image.id ? 'selected' : ''
+                  selectedImageId === image.id ? "selected" : ""
                 }`}
                 onClick={() => handleImageClick(image.id)}
               >
@@ -227,10 +238,10 @@ function ImageComponent({
                   src={image.src}
                   alt="Uploaded"
                   style={{
-                    width: '60px',
-                    height: '60px',
-                    objectFit: 'cover',
-                    borderRadius: '4px',
+                    width: "60px",
+                    height: "60px",
+                    objectFit: "cover",
+                    borderRadius: "4px",
                   }}
                 />
               </div>

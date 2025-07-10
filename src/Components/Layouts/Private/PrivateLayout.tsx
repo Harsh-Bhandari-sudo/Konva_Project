@@ -1,15 +1,18 @@
-// import CardWrapper from '../../../Views/CardWrapper';
-import { AppLayoutProps } from '../AppLayout.d';
-import { IMAGES } from '../../../assets';
-import '../../../App.css';
-// import Navbar from '../Public/Navbar';
+import { AppLayoutProps } from "../AppLayout.d";
+
+// styles
+import "../../../App.css";
+
+// constants
+import { IMAGES } from "../../../assets";
+import TEXT from "../../../Shared/text";
+import CLASSNAME from "../../../Shared/className";
 
 function PrivateLayout({ children }: AppLayoutProps): JSX.Element {
-  console.log(children);
   return (
     <div className="root">
-      <div className="title-project">
-        <img src={IMAGES.LOGO} />
+      <div className={CLASSNAME.LAYOUT.TITLE_PROJECT}>
+        <img src={IMAGES.LOGO} alt={TEXT.TITLE.ALT} />
       </div>
       {children}
     </div>

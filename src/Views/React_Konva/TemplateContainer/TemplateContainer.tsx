@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { TemplateContainerProps } from './types';
+import { useState } from "react";
+import { TemplateContainerProps } from "./types";
 
 function TemplateContainer({
   isLoading,
@@ -33,7 +33,7 @@ function TemplateContainer({
             <div
               key={template.name}
               className={`template-item ${
-                selectedTemplate === template.name ? 'selected' : ''
+                selectedTemplate === template.name ? "selected" : ""
               }`}
               onClick={() => setSelectedTemplate(template.name)}
             >
@@ -44,7 +44,7 @@ function TemplateContainer({
                     alt={`${template.name} thumbnail`}
                     className="thumbnail-image"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
+                      (e.target as HTMLImageElement).style.display = "none";
                       (
                         e.target as HTMLImageElement
                       ).parentElement!.innerHTML = `
@@ -88,8 +88,8 @@ function TemplateContainer({
                 disabled={isLoading}
               >
                 {isLoading && selectedTemplate === template.name
-                  ? 'Loading...'
-                  : 'Load'}
+                  ? "Loading..."
+                  : "Load"}
               </button>
             </div>
           ))}

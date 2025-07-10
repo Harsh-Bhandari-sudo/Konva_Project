@@ -1,4 +1,4 @@
-import { ColorResult } from '@hello-pangea/color-picker';
+import { ColorResult } from "@hello-pangea/color-picker";
 
 export interface ColorComponentProps {
   selectedColor: string;

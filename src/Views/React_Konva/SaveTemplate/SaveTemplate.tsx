@@ -1,4 +1,4 @@
-import { SaveTemplateProps } from './types';
+import { SaveTemplateProps } from "./types";
 
 function SaveTemplate({
   templateName,
@@ -23,7 +23,7 @@ function SaveTemplate({
           disabled={isLoading || !templateName.trim()}
           className="save-btn"
         >
-          {isLoading ? 'Saving...' : 'Save Template'}
+          {isLoading ? "Saving..." : "Save Template"}
         </button>
       </div>
     </div>

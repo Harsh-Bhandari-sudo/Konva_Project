@@ -1,5 +1,8 @@
-import { IMAGES } from '../../../assets';
-import { FilterButtonsProps } from './types';
+// constants
+import { IMAGES } from "../../../assets";
+import TEXT from "../../../Shared/text";
+import { FilterType, FilterButtonsProps, FILTER_OPTIONS } from "./helper";
+import CLASSNAME from "../../../Shared/className";
 
 function FilterButtons({
   activeFilter,
@@ -7,109 +10,38 @@ function FilterButtons({
   handleDownload,
 }: FilterButtonsProps) {
   return (
-    <div className="filters">
-      <button
-        className={`filter-btn${activeFilter === 'save' ? '-active' : ''}`}
-        onClick={() => setActiveFilter(activeFilter === 'save' ? null : 'save')}
-      >
-      <img src={IMAGES.SAVE}/>
-        <span
-          className={`filter-btn-title${
-            activeFilter === 'save' ? null : '-active'
+    <div className={CLASSNAME.LAYOUT.FILTER}>
+      {FILTER_OPTIONS.map((option) => (
+        <button
+          type="button"
+          key={option.value}
+          className={`${CLASSNAME.BUTTON.FILTER}${
+            activeFilter === option.value
+              ? CLASSNAME.BUTTON.ACTIVE
+              : CLASSNAME.EMPTY
           }`}
+          onClick={() => {
+            setActiveFilter(
+              activeFilter === option.value
+                ? null
+                : (option.value as FilterType)
+            );
+            if (option.value === TEXT.LABEL.DOWNLOAD) handleDownload();
+          }}
         >
-          Save
-        </span>
-      </button>
-      <button
-        className={`filter-btn${activeFilter === 'download' ? '-active' : ''}`}
-        onClick={() => {
-          setActiveFilter(activeFilter === 'download' ? null : 'download');
-          handleDownload();
-        }}
-      >
-        <img src={IMAGES.DOWNLOAD}/>
-        <span
-          className={`filter-btn-title${
-            activeFilter === 'download' ? null : '-active'
-          }`}
-        >
-          Download
-        </span>
-      </button>
-      <button
-        className={`filter-btn${activeFilter === 'color' ? '-active' : ''}`}
-        onClick={() =>
-          setActiveFilter(activeFilter === 'color' ? null : 'color')
-        }
-      >
-       <img src={IMAGES.BACKGROUND}/>
-        <span
-          className={`filter-btn-title${
-            activeFilter === 'color' ? null : '-active'
-          }`}
-        >
-          Background
-        </span>
-      </button>
-      <button
-        className={`filter-btn${activeFilter === 'shape' ? '-active' : ''}`}
-        onClick={() =>
-          setActiveFilter(activeFilter === 'shape' ? null : 'shape')
-        }
-      >
-        <img src={IMAGES.SHAPES}/>
-        <span
-          className={`filter-btn-title${
-            activeFilter === 'shape' ? null : '-active'
-          }`}
-        >
-          Shapes
-        </span>
-      </button>
-      <button
-        className={`filter-btn${activeFilter === 'image' ? '-active' : ''}`}
-        onClick={() =>
-          setActiveFilter(activeFilter === 'image' ? null : 'image')
-        }
-      >
-        <img  src={IMAGES.UPLOAD}/>
-        <span
-          className={`filter-btn-title${
-            activeFilter === 'image' ? null : '-active'
-          }`}
-        >
-          Upload
-        </span>
-      </button>
-      <button
-        className={`filter-btn${activeFilter === 'text' ? '-active' : ''}`}
-        onClick={() => setActiveFilter(activeFilter === 'text' ? null : 'text')}
-      >
-       <img src={IMAGES.TEXT}/>
-        <span
-          className={`filter-btn-title${
-            activeFilter === 'text' ? null : '-active'
-          }`}
-        >
-          Text
-        </span>
-      </button>
-      <button
-        className={`filter-btn${activeFilter === 'template' ? '-active' : ''}`}
-        onClick={() =>
-          setActiveFilter(activeFilter === 'template' ? null : 'template')
-        }
-      >
-       <img src={IMAGES.TEMPLATE}/>
-        <span
-          className={`filter-btn-title${
-            activeFilter === 'template' ? null : '-active'
-          }`}
-        >
-          Templates
-        </span>
-      </button>
+          <img
+            src={IMAGES[option.src as keyof typeof IMAGES]}
+            alt={TEXT.TITLE.ALT}
+          />
+          <span
+            className={`${CLASSNAME.BUTTON.FILTER_BTN_TITLE}${
+              activeFilter === option.value ? null : CLASSNAME.BUTTON.ACTIVE
+            }`}
+          >
+            {option.label}
+          </span>
+        </button>
+      ))}
     </div>
   );
 }

@@ -1,6 +1,13 @@
-import { useRef } from 'react';
-import { SketchPicker } from '@hello-pangea/color-picker';
-import { ColorComponentProps } from './types';
+// libs
+import { useRef } from "react";
+
+// components
+import { SketchPicker } from "@hello-pangea/color-picker";
+
+// constants
+import CLASSNAME from "../../../Shared/className";
+import { ColorComponentProps } from "./types";
+import TEXT from "../../../Shared/text";
 
 function ColorComponent({
   selectedColor,
@@ -12,20 +19,23 @@ function ColorComponent({
 }: ColorComponentProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   return (
-    <div className="color-picker-container">
-      <div className="add-colors">
-        <h4 className="color-title">Color</h4>
+    <div className={CLASSNAME.LAYOUT.COLOR_PICKER_CONTAINER}>
+      <div className={CLASSNAME.LAYOUT.ADD_COLORS}>
+        <h4 className={CLASSNAME.HEADER.COLOR_TITLE}>{TEXT.HEADER.COLOR}</h4>
         <SketchPicker
           color={selectedColor}
           onChangeComplete={handleColorChange}
         />
       </div>
-      <div className="background-image-upload">
-        <h4 className="color-title">Background Image</h4>
-        <div className="upload-wrapper">
+      <div className={CLASSNAME.LAYOUT.BACKGROUND_IMAGE_UPLOAD}>
+        <h4 className={CLASSNAME.HEADER.COLOR_TITLE}>
+          {TEXT.HEADER.BACKGROUND_IMG}
+        </h4>
+        <div className={CLASSNAME.LAYOUT.UPLOAD_WRAPPER}>
           <input
+            title={TEXT.TITLE.INPUT}
             ref={fileInputRef}
-            className="choose-file"
+            className={CLASSNAME.INPUT.CHOOSE_FILE}
             type="file"
             accept="image/*"
             onChange={(e) => handleFileUpload(e.target.files)}
@@ -35,14 +45,14 @@ function ColorComponent({
               type="button"
               onClick={() => {
                 setBackgroundImage(null);
-                setSelectedColor('#ffffff');
+                setSelectedColor("#ffffff");
                 if (fileInputRef.current) {
-                  fileInputRef.current.value = '';
+                  fileInputRef.current.value = "";
                 }
               }}
-              className="delete-btn"
+              className={CLASSNAME.BUTTON.DELETE}
             >
-              Remove
+              {TEXT.BUTTON.REMOVE}
             </button>
           )}
         </div>

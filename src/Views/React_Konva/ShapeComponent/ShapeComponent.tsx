@@ -1,6 +1,6 @@
-import { SketchPicker } from '@hello-pangea/color-picker';
-import { useEffect } from 'react';
-import { ShapeComponentProps } from './types';
+import { SketchPicker } from "@hello-pangea/color-picker";
+import { useEffect } from "react";
+import { ShapeComponentProps } from "./types";
 
 function ShapeComponent({
   deleteSelectedShape,
@@ -25,7 +25,7 @@ function ShapeComponent({
       <div className="shape-buttons">
         <h4 className="color-title">Add Shapes</h4>
         <div className="shapes">
-          <button type="button" onClick={() => addShape('rectangle')}>
+          <button type="button" onClick={() => addShape("rectangle")}>
             <svg
               width="90"
               height="90"
@@ -45,7 +45,7 @@ function ShapeComponent({
               />
             </svg>
           </button>
-          <button type="button" onClick={() => addShape('circle')}>
+          <button type="button" onClick={() => addShape("circle")}>
             <svg
               width="90"
               height="90"
@@ -64,7 +64,7 @@ function ShapeComponent({
               />
             </svg>
           </button>
-          <button type="button" onClick={() => addShape('triangle')}>
+          <button type="button" onClick={() => addShape("triangle")}>
             <svg
               width="90"
               height="90"
@@ -82,7 +82,7 @@ function ShapeComponent({
               />
             </svg>
           </button>
-          <button type="button" onClick={() => addShape('star')}>
+          <button type="button" onClick={() => addShape("star")}>
             <svg
               width="90"
               height="90"
@@ -100,7 +100,7 @@ function ShapeComponent({
               />
             </svg>
           </button>
-          <button type="button" onClick={() => addShape('ellipse')}>
+          <button type="button" onClick={() => addShape("ellipse")}>
             <svg
               width="90"
               height="90"
@@ -154,10 +154,10 @@ function ShapeComponent({
                 onChange={(e) => {
                   const value = parseInt(e.target.value);
                   setStrokeWidth(value);
-                  updateShapeProperty('strokeWidth', value);
+                  updateShapeProperty("strokeWidth", value);
                 }}
               />
-              <span>px</span>
+              <span>{strokeWidth ?? ""}px</span>
             </div>
           </div>
 
@@ -173,7 +173,7 @@ function ShapeComponent({
                     type="number"
                     value={selectedShape.width}
                     onChange={(e) =>
-                      updateShapeProperty('width', parseInt(e.target.value))
+                      updateShapeProperty("width", parseInt(e.target.value))
                     }
                   />
                   <span>px</span>
@@ -188,7 +188,7 @@ function ShapeComponent({
                     type="number"
                     value={selectedShape.height}
                     onChange={(e) =>
-                      updateShapeProperty('height', parseInt(e.target.value))
+                      updateShapeProperty("height", parseInt(e.target.value))
                     }
                   />
                   <span>px</span>
@@ -198,16 +198,32 @@ function ShapeComponent({
               <div className="z-index-controls">
                 <h4>Layer Controls</h4>
                 <div className="z-index-buttons">
-                  <button type="button" onClick={bringToFront} className="layer-btn">
+                  <button
+                    type="button"
+                    onClick={bringToFront}
+                    className="layer-btn"
+                  >
                     Bring to Front
                   </button>
-                  <button type="button" onClick={moveForward} className="layer-btn">
+                  <button
+                    type="button"
+                    onClick={moveForward}
+                    className="layer-btn"
+                  >
                     Move Forward
                   </button>
-                  <button type="button" onClick={moveBackward} className="layer-btn">
+                  <button
+                    type="button"
+                    onClick={moveBackward}
+                    className="layer-btn"
+                  >
                     Move Backward
                   </button>
-                  <button type="button" onClick={sendToBack} className="layer-btn">
+                  <button
+                    type="button"
+                    onClick={sendToBack}
+                    className="layer-btn"
+                  >
                     Send to Back
                   </button>
                 </div>
@@ -217,14 +233,18 @@ function ShapeComponent({
                     type="number"
                     value={selectedShape.zIndex}
                     onChange={(e) =>
-                      updateShapeProperty('zIndex', parseInt(e.target.value))
+                      updateShapeProperty("zIndex", parseInt(e.target.value))
                     }
-                    style={{ width: '60px', marginLeft: '8px' }}
+                    style={{ width: "60px", marginLeft: "8px" }}
                   />
                 </div>
               </div>
 
-              <button type="button" onClick={deleteSelectedShape} className="delete-btn">
+              <button
+                type="button"
+                onClick={deleteSelectedShape}
+                className="delete-btn"
+              >
                 Delete Shape
               </button>
             </div>

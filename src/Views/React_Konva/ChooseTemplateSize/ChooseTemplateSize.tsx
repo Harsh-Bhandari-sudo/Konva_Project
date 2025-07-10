@@ -1,21 +1,15 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './choosetemplatesize.css';
+// libs
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-type SizeOption = {
-  name: string;
-  width: number;
-  height: number;
-};
+// styles
+import "./choosetemplatesize.css";
 
-const sizeOptions: SizeOption[] = [
-  { name: 'Logo', width: 600, height: 600 },
-  { name: 'Business Card', width: 1050, height: 600 },
-  { name: 'US Legal', width: 816, height: 800 },
-  { name: 'A5', width: 559, height: 794 },
-  { name: 'A6', width: 397, height: 559 },
-  { name: 'Custom', width: 750, height: 750 },
-];
+// constants
+import CLASSNAME from "../../../Shared/className";
+import TEXT from "../../../Shared/text";
+import SIZE_OPTIONS, { SizeOption } from "./helper";
+
 function ChooseTemplateSize() {
   const [selectedSize, setSelectedSize] = useState<SizeOption | null>(null);
   const navigate = useNavigate();
@@ -25,46 +19,52 @@ function ChooseTemplateSize() {
   };
 
   const handleStartDesigning = () => {
-    navigate('/konva', { state: { size: selectedSize } });
+    navigate("/konva", { state: { size: selectedSize } });
   };
-
   return (
-    <div className="container">
-      <div className="choose-template-size">
-        <div className="title">
-          <span className="title">Get started with a design size</span>
+    <div className={CLASSNAME.LAYOUT.CONTAINER}>
+      <div className={CLASSNAME.LAYOUT.CHOOSE_TEMPLATE_SIZE}>
+        <div className={CLASSNAME.LAYOUT.TITLE}>
+          <span className={CLASSNAME.LAYOUT.TITLE}>
+            {TEXT.MESSAGE.DESIGN_SIZE}
+          </span>
         </div>
 
-        <div className="grid">
-          {sizeOptions.map((size, index) => (
-            <div
-              key={index}
-              className={`sizeOption ${
-                selectedSize?.name === size.name ? 'sizeOptionSelected' : ''
+        <div className={CLASSNAME.LAYOUT.GRID}>
+          {SIZE_OPTIONS.map((size) => (
+            <button
+              key={size?.name}
+              type="button"
+              className={`${CLASSNAME.BUTTON.SIZE_OPTION} ${
+                selectedSize?.name === size.name
+                  ? CLASSNAME.BUTTON.SIZE_OPTION_SELCTED
+                  : CLASSNAME.EMPTY
               }`}
               onClick={() => handleSizeSelect(size)}
             >
-              <h3 className="sizeName">{size.name}</h3>
-              <p className="sizeDimensions">
-                {size.width} × {size.height}
+              <h3 className={CLASSNAME.HEADER.SIZE_NAME}>{size.name}</h3>
+              <p className={CLASSNAME.LAYOUT.SIZE_DIMENSIONS}>
+                {size.width} {TEXT.ICON.CROSS} {size.height}
               </p>
-            </div>
+            </button>
           ))}
         </div>
 
         <button
           type="button"
           onClick={handleStartDesigning}
-          className={`button ${!selectedSize ? 'buttonDisabled' : ''}`}
+          className={`${CLASSNAME.BUTTON.BUTTON} ${
+            !selectedSize ? CLASSNAME.BUTTON.BUTTON_DISABLED : CLASSNAME.EMPTY
+          }`}
           disabled={!selectedSize}
         >
-          Start Designing
+          {TEXT.BUTTON.START_DESIGNING}
         </button>
 
         {selectedSize && (
-          <div className="selectedInfo">
-            Selected: {selectedSize.name} ({selectedSize.width} ×{' '}
-            {selectedSize.height})
+          <div className={CLASSNAME.LAYOUT.SELECTED_INFO}>
+            {TEXT.MESSAGE.SELECTED} {selectedSize.name} ({selectedSize.width}{" "}
+            {TEXT.ICON.CROSS} {selectedSize.height})
           </div>
         )}
       </div>
