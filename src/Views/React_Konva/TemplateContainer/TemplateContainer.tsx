@@ -1,5 +1,10 @@
+// libs
 import { useState } from "react";
-import { TemplateContainerProps } from "./types";
+
+// constants
+import { TemplateContainerProps } from "./helper/types";
+import CLASSNAME from "../../../Shared/className";
+import TEXT from "../../../Shared/text";
 
 function TemplateContainer({
   isLoading,
@@ -16,33 +21,37 @@ function TemplateContainer({
   });
 
   return (
-    <div className="templates-container">
-      <h4 className="color-title">Saved Templates</h4>
+    <div className={CLASSNAME.LAYOUT.TEMPLATE_CONTAINER}>
+      <h4 className={CLASSNAME.HEADER.COLOR_TITLE}>
+        {TEXT.HEADER.SAVE_TEMPLATE}
+      </h4>
       {isLoading ? (
-        <div className="loading-container">
-          <div className="loading-spinner" />
-          <span>Loading templates...</span>
+        <div className={CLASSNAME.LAYOUT.LOADING_CONTAINER}>
+          <div className={CLASSNAME.LAYOUT.LOADING_SPINNER} />
+          <span>{TEXT.MESSAGE.LOADING_TEMPLATE}</span>
         </div>
       ) : compatibleTemplates.length === 0 ? (
-        <div className="no-templates">
-          <p>No saved templates found</p>
+        <div className={CLASSNAME.LAYOUT.NO_TEMPLATE}>
+          <p>{TEXT.MESSAGE.NO_SAVED_TEMPLATE}</p>
         </div>
       ) : (
-        <div className="templates-grid">
+        <div className={CLASSNAME.LAYOUT.TEMPLATE_GRID}>
           {compatibleTemplates.map((template) => (
             <div
               key={template.name}
-              className={`template-item ${
-                selectedTemplate === template.name ? "selected" : ""
+              className={`${CLASSNAME.LAYOUT.TEMPLATE_ITEM} ${
+                selectedTemplate === template.name
+                  ? CLASSNAME.LAYOUT.SELECTED
+                  : ""
               }`}
               onClick={() => setSelectedTemplate(template.name)}
             >
-              <div className="template-thumbnail">
+              <div className={CLASSNAME.LAYOUT.TEMPLATE_THUMBNAIL}>
                 {template.data.thumbnail ? (
                   <img
                     src={template.data.thumbnail}
                     alt={`${template.name} thumbnail`}
-                    className="thumbnail-image"
+                    className={CLASSNAME.LAYOUT.THUMBNAIL_IMAGE}
                     onError={(e) => {
                       (e.target as HTMLImageElement).style.display = "none";
                       (
@@ -59,7 +68,7 @@ function TemplateContainer({
                     }}
                   />
                 ) : (
-                  <div className="thumbnail-placeholder">
+                  <div className={CLASSNAME.LAYOUT.THUMBNAIL_PLACEHOLDER}>
                     <svg
                       width="60"
                       height="60"
@@ -75,8 +84,10 @@ function TemplateContainer({
                 )}
               </div>
 
-              <div className="template-info">
-                <span className="template-name">{template.name}</span>
+              <div className={CLASSNAME.LAYOUT.TEMPLATE_INFO}>
+                <span className={CLASSNAME.LAYOUT.TEMPLATE_NAME}>
+                  {template.name}
+                </span>
               </div>
 
               <button
@@ -84,12 +95,12 @@ function TemplateContainer({
                   e.stopPropagation();
                   loadTemplate(template.name);
                 }}
-                className="load-btn"
+                className={CLASSNAME.BUTTON.LOAD_BTN}
                 disabled={isLoading}
               >
                 {isLoading && selectedTemplate === template.name
-                  ? "Loading..."
-                  : "Load"}
+                  ? TEXT.BUTTON.LOADING
+                  : TEXT.BUTTON.LOAD}
               </button>
             </div>
           ))}

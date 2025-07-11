@@ -1,7 +1,7 @@
 import { RefObject } from "react";
-import { CardImage } from "../../../Shared/types";
+import { CardImage } from "../../../../Shared/types";
 
-type ImageProperty =
+export type ImageProperty =
   | "width"
   | "height"
   | "brightness"

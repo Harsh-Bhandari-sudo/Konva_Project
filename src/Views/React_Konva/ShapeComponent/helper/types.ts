@@ -1,9 +1,14 @@
 import { ColorResult } from "@hello-pangea/color-picker";
-import { ShapeData } from "../../../Shared/types";
+import { ShapeData } from "../../../../Shared/types";
 
-type ShapeType = "rectangle" | "circle" | "triangle" | "star" | "ellipse";
+export type ShapeType =
+  | "rectangle"
+  | "circle"
+  | "triangle"
+  | "star"
+  | "ellipse";
 
-interface Shape {
+export interface Shape {
   type: ShapeType;
   width: number;
   height: number;
@@ -25,7 +30,7 @@ export interface ShapeComponentProps {
   setStrokeWidth: (width: number) => void;
   updateShapeProperty: (
     property: keyof ShapeData,
-    value: number | string
+    value: number | string,
   ) => void;
   bringToFront: () => void;
   selectedImageId: string | number | null;

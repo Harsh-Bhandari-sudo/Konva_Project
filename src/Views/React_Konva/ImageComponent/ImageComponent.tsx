@@ -1,4 +1,16 @@
-import { ImageComponentProps } from "./types";
+// components
+import ZIndex from "../../../Components/Molecule/ZIndex";
+import CustomInput from "../../../Components/Atom/CustomInput";
+
+// types
+import { ImageComponentProps, ImageProperty } from "./helper/types";
+
+// constants
+import { IMAGES } from "../../../assets";
+import TEXT from "../../../Shared/text";
+import CLASSNAME from "../../../Shared/className";
+import selectedPropertiesOptions from "../../../Shared/constant";
+import IMAGE_CONFIG from "./helper/constant";
 
 function ImageComponent({
   handleImageClick,
@@ -19,34 +31,24 @@ function ImageComponent({
   moveBackward,
 }: ImageComponentProps) {
   return (
-    <div className="image-upload-section">
+    <div className={CLASSNAME.LAYOUT.IMAGE_UPLOAD_SECTION}>
       <div
-        className={`drag-drop-area ${dragOver ? "drag-over" : ""}`}
+        className={`${CLASSNAME.LAYOUT.DRAG_DROP_AREA} ${
+          dragOver ? CLASSNAME.LAYOUT.DRAG_OVER : CLASSNAME.EMPTY
+        }`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={() => fileInputRef.current?.click()}
       >
-        <div className="drag-drop-content">
-          <p>Add your media</p>
-          <span>You can upload your media from your device.</span>
+        <div className={CLASSNAME.LAYOUT.DRAG_DROP_CONTENT}>
+          <p>{TEXT.MESSAGE.ADD_YOUR_MEDIA}</p>
+          <span>{TEXT.MESSAGE.UPLOAD_YOUR_MEDIA}</span>
           <button type="button">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="17 8 12 3 7 8" />
-              <line x1="12" y1="3" x2="12" y2="15" />
-            </svg>
-            <span className="upload-media"> Upload media</span>
+            <img src={IMAGES.UPLOAD} alt={TEXT.TITLE.ALT} />
+            <span className={CLASSNAME.LAYOUT.UPLOAD_MEDIA}>
+              {TEXT.MESSAGE.UPLOAD_MEDIA}
+            </span>
           </button>
         </div>
       </div>
@@ -61,182 +63,92 @@ function ImageComponent({
       />
 
       {selectedImage && (
-        <div className="image-controls">
-          <h4>Selected Image Properties</h4>
-
-          <div className="size-controls">
-            <div className="property-group">
-              <label>Width:</label>
-              <div className="text-property">
-                <input
-                  className="input-font-size"
-                  type="number"
-                  min="20"
-                  value={selectedImage.width}
-                  onChange={(e) =>
-                    updateImageProperty("width", parseInt(e.target.value))
-                  }
-                />
-                <span>px</span>
-              </div>
-            </div>
-
-            <div className="property-group">
-              <label>Height:</label>
-              <div className="text-property">
-                <input
-                  className="input-font-size"
-                  type="number"
-                  min="20"
-                  value={selectedImage.height}
-                  onChange={(e) =>
-                    updateImageProperty("height", parseInt(e.target.value))
-                  }
-                />
-                <span>px</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="filter-controls">
-            <div className="property-group">
-              <label>Brightness:</label>
-              <div className="text-property">
-                <input
-                  type="range"
-                  min="0"
-                  max="2"
-                  step="0.1"
-                  value={selectedImage.brightness}
-                  onChange={(e) =>
-                    updateImageProperty(
-                      "brightness",
-                      parseFloat(e.target.value)
-                    )
-                  }
-                />
-                <span>{selectedImage.brightness.toFixed(1)}</span>
-              </div>
-            </div>
-            <div className="property-group">
-              <label>Contrast:</label>
-              <div className="text-property">
-                <input
-                  type="range"
-                  min="0"
-                  max="2"
-                  step="0.1"
-                  value={selectedImage.contrast}
-                  onChange={(e) =>
-                    updateImageProperty("contrast", parseFloat(e.target.value))
-                  }
-                />
-                <span>{selectedImage.contrast.toFixed(1)}</span>
-              </div>
-            </div>
-
-            <div className="property-group">
-              <label>Saturation:</label>
-              <div className="text-property">
-                <input
-                  type="range"
-                  min="0"
-                  max="2"
-                  step="0.1"
-                  value={selectedImage.saturation}
-                  onChange={(e) =>
-                    updateImageProperty(
-                      "saturation",
-                      parseFloat(e.target.value)
-                    )
-                  }
-                />
-                <span>{selectedImage.saturation.toFixed(1)}</span>
-              </div>
-            </div>
-
-            <div className="property-group">
-              <label>Opacity:</label>
-              <div className="text-property">
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.1"
-                  value={selectedImage.opacity}
-                  onChange={(e) =>
-                    updateImageProperty("opacity", parseFloat(e.target.value))
-                  }
-                />
-                <span>{selectedImage.opacity.toFixed(1)}</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="z-index-controls">
-            <h4>Layer Controls</h4>
-            <div className="z-index-buttons">
-              <button
-                type="button"
-                onClick={bringToFront}
-                className="layer-btn"
-              >
-                Bring to Front
-              </button>
-              <button type="button" onClick={moveForward} className="layer-btn">
-                Move Forward
-              </button>
-              <button
-                type="button"
-                onClick={moveBackward}
-                className="layer-btn"
-              >
-                Move Backward
-              </button>
-              <button type="button" onClick={sendToBack} className="layer-btn">
-                Send to Back
-              </button>
-            </div>
-            <div className="property-group">
-              <label>Z-Index:</label>
-              <input
+        <div className={CLASSNAME.LAYOUT.IMAGE_CONTROLS}>
+          <h4>{TEXT.HEADER.SELECTED_IMAGE}</h4>
+          <div className={CLASSNAME.LAYOUT.SIZE_CONTROLS}>
+            {selectedPropertiesOptions.map((option) => (
+              <CustomInput
+                key={option.value}
                 type="number"
-                value={selectedImage.zIndex}
+                label={option.label}
+                value={selectedImage[option.value as ImageProperty]}
+                min="20"
+                displayValue="px"
                 onChange={(e) =>
-                  updateImageProperty("zIndex", parseInt(e.target.value))
+                  updateImageProperty(
+                    option.value as ImageProperty,
+                    parseInt(e.target.value, 10),
+                  )
                 }
-                style={{ width: "60px", marginLeft: "8px" }}
               />
-            </div>
+            ))}
           </div>
 
-          <div className="delete-text">
+          <div className={CLASSNAME.LAYOUT.FILTER_CONTROLS}>
+            {IMAGE_CONFIG.map((option) => (
+              <CustomInput
+                key={option.value}
+                type="range"
+                label={option.label}
+                value={selectedImage[option.value as ImageProperty]}
+                min={option.min}
+                max={option.max}
+                step={option.step}
+                displayValue={selectedImage[
+                  option.value as ImageProperty
+                ].toFixed(1)}
+                onChange={(e) =>
+                  updateImageProperty(
+                    option.value as ImageProperty,
+                    parseFloat(e.target.value),
+                  )
+                }
+              />
+            ))}
+          </div>
+
+          <ZIndex
+            bringToFront={bringToFront}
+            moveForward={moveForward}
+            moveBackward={moveBackward}
+            sendToBack={sendToBack}
+            value={selectedImage.zIndex}
+            updateProperty={
+              updateImageProperty as (property: string, value: number) => void
+            }
+          />
+
+          <div className={CLASSNAME.LAYOUT.DELETE_TEXT}>
             <button
               type="button"
               onClick={deleteSelectedImage}
-              className="delete-btn"
+              className={CLASSNAME.BUTTON.DELETE}
             >
-              Delete Image
+              {TEXT.BUTTON.DELETE_IMAGE}
             </button>
           </div>
         </div>
       )}
 
       {images.length > 0 && (
-        <div className="uploaded-images">
-          <h4>Uploaded Images ({images.length})</h4>
-          <div className="images-grid">
+        <div className={CLASSNAME.LAYOUT.UPLOADED_IMAGES}>
+          <h4>
+            {TEXT.HEADER.UPLOADED_IMAGES} ({images.length})
+          </h4>
+          <div className={CLASSNAME.LAYOUT.IMAGES_GRID}>
             {images.map((image) => (
               <div
                 key={image.id}
-                className={`image-thumbnail ${
-                  selectedImageId === image.id ? "selected" : ""
+                className={`${CLASSNAME.LAYOUT.IMAGE_THUMBNAIL} ${
+                  selectedImageId === image.id
+                    ? CLASSNAME.LAYOUT.SELECTED
+                    : CLASSNAME.EMPTY
                 }`}
                 onClick={() => handleImageClick(image.id)}
               >
                 <img
                   src={image.src}
-                  alt="Uploaded"
+                  alt={TEXT.TITLE.ALT}
                   style={{
                     width: "60px",
                     height: "60px",

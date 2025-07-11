@@ -6,7 +6,7 @@ import { SketchPicker } from "@hello-pangea/color-picker";
 
 // constants
 import CLASSNAME from "../../../Shared/className";
-import { ColorComponentProps } from "./types";
+import { ColorComponentProps } from "./helper/types";
 import TEXT from "../../../Shared/text";
 
 function ColorComponent({

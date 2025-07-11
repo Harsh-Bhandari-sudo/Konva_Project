@@ -46,18 +46,7 @@ export interface TextState {
   fill: string;
   zIndex: number;
   width: number;
-  height?: number;
-  isFancy?: boolean;
-  fancyStyle?: string;
-  outlineColor?: string;
-  outlineWidth?: number;
-  shadowColor?: string;
-  shadowBlur?: number;
-  shadowOffsetX?: number;
-  shadowOffsetY?: number;
-  scaleX?: number;
-  scaleY?: number;
-  originalFontSize?: number;
+  [key: string]: string | number;
 }
 
 // Template Data Interface

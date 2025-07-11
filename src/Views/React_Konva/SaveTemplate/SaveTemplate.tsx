@@ -1,5 +1,5 @@
 // constants
-import { SaveTemplateProps } from "./types";
+import { SaveTemplateProps } from "./helper/types";
 import CLASSNAME from "../../../Shared/className";
 import TEXT from "../../../Shared/text";
 

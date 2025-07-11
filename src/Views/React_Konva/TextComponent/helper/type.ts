@@ -16,17 +16,14 @@ export type FontFamily =
   | "Trebuchet MS"
   | "Palatino";
 
-interface TextItem {
+export interface TextItem {
   id: string;
   text: string;
   fontSize: number;
   fontStyle: FontWeight;
   fontFamily: FontFamily;
   zIndex: number;
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
+  [key: string]: string | number;
 }
 
 export interface TextComponentProps {
@@ -46,7 +43,7 @@ export interface TextComponentProps {
   selectedTextId: string | null;
   updateTextProperty: (
     property: keyof TextState,
-    value: string | number,
+    value: string | number
   ) => void;
   textFontWeight: FontWeight;
   setTextFontWeight: (weight: FontWeight) => void;

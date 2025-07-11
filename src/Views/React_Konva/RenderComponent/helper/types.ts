@@ -1,6 +1,6 @@
 import { RefObject } from "react";
 import Konva from "konva";
-import { ShapeData, CardImage, TextState } from "../../../Shared/types";
+import { ShapeData, CardImage, TextState } from "../../../../Shared/types";
 
 type CanvasElement = ShapeData | CardImage | TextState;
 

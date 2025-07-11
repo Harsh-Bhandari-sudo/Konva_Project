@@ -1,39 +1,49 @@
-import React from "react";
-
 // constants
 import CLASSNAME from "../../../Shared/className";
 import TEXT from "../../../Shared/text";
+import { ShapeType } from "../../../Views/React_Konva/ShapeComponent/helper/types";
 
-// interface
-type InputType = "text" | "password" | "email" | "number";
-
-interface InputProps {
-  type?: InputType;
-  value?: string;
-  name?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  defaultValue?: string;
+interface CustomInputProps {
+  label: string;
+  type: string;
+  value: number | ShapeType;
+  displayValue: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  min?: string;
+  max?: string;
+  step?: string;
 }
 
-const CustomInput: React.FC<InputProps> = ({
+export default function CustomInput({
+  label,
   value,
-  name,
-  onChange,
+  displayValue,
   type,
-  defaultValue,
-}) => {
+  min = undefined,
+  max = undefined,
+  step = undefined,
+  onChange,
+}: CustomInputProps) {
   return (
-    <div className={CLASSNAME.LAYOUT.INPUT_CONTAINER}>
-      <input
-        title={TEXT.TITLE.INPUT}
-        type={type}
-        value={value}
-        name={name}
-        onChange={onChange}
-        defaultValue={defaultValue}
-      />
+    <div className={CLASSNAME.LAYOUT.PROPERTY_GROUP}>
+      <label>{label}</label>
+      <div className={CLASSNAME.LAYOUT.TEXT_PROPERTY}>
+        <input
+          title={TEXT.TITLE.INPUT}
+          type={type}
+          min={min}
+          max={max}
+          step={step}
+          value={value}
+          onChange={onChange}
+        />
+        <span>{displayValue}</span>
+      </div>
     </div>
   );
+}
+CustomInput.defaultProps = {
+  min: undefined,
+  max: undefined,
+  step: undefined,
 };
-
-export default CustomInput;

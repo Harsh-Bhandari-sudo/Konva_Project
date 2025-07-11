@@ -21,7 +21,7 @@ import {
   getTemplate,
 } from "../../../Services/firebase";
 import { FontFamily } from "../TextComponent/helper/type";
-import { Template } from "../TemplateContainer/types";
+import { Template } from "../TemplateContainer/helper/types";
 import { ShapeData, CardImage, TextState } from "../../../Shared/types";
 import {
   sortByZIndex,

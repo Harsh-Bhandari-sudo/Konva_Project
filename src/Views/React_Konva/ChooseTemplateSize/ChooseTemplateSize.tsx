@@ -8,7 +8,7 @@ import "./choosetemplatesize.css";
 // constants
 import CLASSNAME from "../../../Shared/className";
 import TEXT from "../../../Shared/text";
-import SIZE_OPTIONS, { SizeOption } from "./helper";
+import SIZE_OPTIONS, { SizeOption } from "./helper/constant";
 
 function ChooseTemplateSize() {
   const [selectedSize, setSelectedSize] = useState<SizeOption | null>(null);

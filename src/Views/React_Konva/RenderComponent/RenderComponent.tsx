@@ -1,3 +1,4 @@
+// libs
 import {
   Stage,
   Layer,
@@ -5,11 +6,15 @@ import {
   Transformer,
   Image as KonvaImage,
 } from "react-konva";
-import "../../DynamicCss/CustomizeImage/CustomizeImage.css";
 import { useRef, useEffect } from "react";
 import Konva from "konva";
+
+// styles
+import "../../DynamicCss/CustomizeImage/CustomizeImage.css";
+
+// constants and utils
 import { ShapeData, CardImage, TextState } from "../../../Shared/types";
-import { RenderImageProps } from "./types";
+import { RenderImageProps } from "./helper/types";
 
 function RenderImage({
   stageRef,

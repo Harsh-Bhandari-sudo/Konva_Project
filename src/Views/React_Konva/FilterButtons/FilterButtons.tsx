@@ -1,7 +1,8 @@
 // constants
 import { IMAGES } from "../../../assets";
 import TEXT from "../../../Shared/text";
-import { FilterType, FilterButtonsProps, FILTER_OPTIONS } from "./helper";
+import { FilterType, FilterButtonsProps } from "./helper/types";
+import FILTER_OPTIONS from "./helper/constant";
 import CLASSNAME from "../../../Shared/className";
 
 function FilterButtons({

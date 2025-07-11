@@ -3,10 +3,14 @@ import { useEffect, useRef } from "react";
 import Konva from "konva";
 import { SketchPicker } from "@hello-pangea/color-picker";
 
-// constants
+// components
+import ZIndex from "../../../Components/Molecule/ZIndex";
+
+// constants and utils
 import { TextComponentProps, FontFamily, FontWeight } from "./helper/type";
 import CLASSNAME from "../../../Shared/className";
 import { FONT_WEIGHT_PROPERTY, FONT_FAMILY_PROPERTY } from "./helper/constant";
+import TEXT from "../../../Shared/text";
 
 function TextComponent({
   deleteSelectedText,
@@ -250,42 +254,14 @@ function TextComponent({
             </div>
           </div>
 
-          <div className="z-index-controls">
-            <h4>Layer Controls</h4>
-            <div className="z-index-buttons">
-              <button
-                type="button"
-                onClick={bringToFront}
-                className="layer-btn"
-              >
-                Bring to Front
-              </button>
-              <button type="button" onClick={moveForward} className="layer-btn">
-                Move Forward
-              </button>
-              <button
-                type="button"
-                onClick={moveBackward}
-                className="layer-btn"
-              >
-                Move Backward
-              </button>
-              <button type="button" onClick={sendToBack} className="layer-btn">
-                Send to Back
-              </button>
-            </div>
-            <div className="property-group">
-              <label>Z-Index:</label>
-              <input
-                type="number"
-                value={selectedText.zIndex}
-                onChange={(e) =>
-                  updateTextProperty("zIndex", parseInt(e.target.value))
-                }
-                style={{ width: "60px", marginLeft: "8px" }}
-              />
-            </div>
-          </div>
+          <ZIndex
+            bringToFront={bringToFront}
+            moveForward={moveForward}
+            moveBackward={moveBackward}
+            sendToBack={sendToBack}
+            value={selectedText.zIndex}
+            updateProperty={updateTextProperty}
+          />
 
           <div className="delete-text">
             <button
@@ -298,28 +274,31 @@ function TextComponent({
           </div>
         </div>
       )}
-
-      {text.length > 0 && (
+      {text[TEXT.KEY.LENGTH as "length"] > 0 && (
         <div className={CLASSNAME.LAYOUT.TEXT_LIST}>
-          <h4>Text Elements ({text.length})</h4>
+          <h4>
+            {TEXT.HEADER.TEXT_ELEMENT} ({text[TEXT.KEY.LENGTH as "length"]})
+          </h4>
           <div className={CLASSNAME.LAYOUT.TEXT_ITEMS}>
             {text.map((textItem) => (
-              <div
-                key={textItem.id}
+              <button
+                key={textItem[TEXT.KEY.ID]}
+                type="button"
                 className={`${CLASSNAME.LAYOUT.TEXT_ITEM} ${
-                  selectedTextId === textItem.id
+                  selectedTextId === textItem[TEXT.KEY.ID]
                     ? CLASSNAME.LAYOUT.SELECTED
                     : CLASSNAME.EMPTY
                 }`}
-                onClick={() => handleTextClick(textItem.id)}
+                onClick={() => handleTextClick(textItem[TEXT.KEY.ID as "id"])}
               >
                 <div className={CLASSNAME.LAYOUT.TEXT_INFO}>
                   <small>
-                    {textItem.text} <br /> {textItem.fontSize}px •{"  "}
-                    {textItem.fontStyle}
+                    {textItem[TEXT.KEY.TEXT]} <br />{" "}
+                    {textItem[TEXT.KEY.FONT_SIZE]}px •{"  "}
+                    {textItem[TEXT.KEY.FONT_STYLE]}
                   </small>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
