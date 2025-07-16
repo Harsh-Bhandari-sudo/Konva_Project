@@ -11,7 +11,6 @@ import WEDDING_TEMPLATE from "./icons/card13.jpg";
 import PROJECT_LOGO from "./icons/project-logo.png";
 import LOGO from "./icons/customcardlogo.png";
 import SIZE from "./icons/size.png";
-import TEMPLATES from "./icons/templates.svg";
 import BACKGROUND from "./icons/background.svg";
 import DOWNLOAD from "./icons/download.svg";
 import SAVE from "./icons/save.svg";
@@ -28,7 +27,6 @@ export {
   DOWNLOAD,
   BACKGROUND,
   TEMPLATE,
-  TEMPLATES,
   SIZE,
   LOGO,
   PROJECT_LOGO,
@@ -50,7 +48,6 @@ export const IMAGES = {
   DOWNLOAD,
   BACKGROUND,
   TEMPLATE,
-  TEMPLATES,
   SIZE,
   LOGO,
   TEXT,

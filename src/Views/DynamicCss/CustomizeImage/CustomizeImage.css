@@ -4,10 +4,8 @@
 .wrapper {
   width: 100%;
   height: 100%;
-  background-color: rgba(218, 214, 214, 0.363);
   display: flex;
   flex-direction: row;
-
   align-items: center;
   background-color: #f9f9f9;
   background-image: radial-gradient(#dcdcdc 0.5px, transparent 1.5px);
@@ -64,15 +62,7 @@ button:focus,
   outline: none !important;
 }
 .filter-btn-active {
-  padding: 8px 12px;
-  margin: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  height: 41px;
-  width: calc(100% - 20px);
   background-color: #cdf0fb;
-  border: none;
   color: #00688c;
   font-weight: 600;
   outline: none;
@@ -472,12 +462,10 @@ img {
 }
 
 .choose-file {
-  margin-left: 20px;
   display: flex;
   margin-left: 20px;
   align-items: center;
   justify-content: start;
-  width: 80%;
   height: 36px;
   width: 90%;
   margin-right: 10px;
@@ -632,7 +620,6 @@ button.layer-btn {
 
 .image-controls {
   background-color: #d9d9d95e;
-  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -721,10 +708,8 @@ button.save-btn {
 }
 
 .size-dimensions {
-  display: flex;
   flex-direction: column;
   padding: 17px;
-
   display: flex;
   justify-content: space-between;
 }

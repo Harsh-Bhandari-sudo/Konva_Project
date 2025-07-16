@@ -2,7 +2,7 @@ import Konva from "konva";
 import { ColorResult } from "@hello-pangea/color-picker";
 import { TextState } from "../../../../Shared/types";
 
-export type FontWeight = "normal" | "bold" | "lighter" | "bolder" | string;
+export type FontWeight = "normal" | "bold" | "lighter" | "bolder";
 
 export type FontFamily =
   | "Arial"
@@ -20,7 +20,7 @@ export interface TextItem {
   id: string;
   text: string;
   fontSize: number;
-  fontStyle: FontWeight;
+  fontStyle: string;
   fontFamily: FontFamily;
   zIndex: number;
   [key: string]: string | number;
@@ -45,7 +45,7 @@ export interface TextComponentProps {
     property: keyof TextState,
     value: string | number
   ) => void;
-  textFontWeight: FontWeight;
+  textFontWeight: string;
   setTextFontWeight: (weight: FontWeight) => void;
   textFontFamily: FontFamily;
   setTextFontFamily: (family: FontFamily) => void;

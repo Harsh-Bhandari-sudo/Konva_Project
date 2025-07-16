@@ -6,23 +6,27 @@ import { ShapeType } from "../../../Views/React_Konva/ShapeComponent/helper/type
 interface CustomInputProps {
   label: string;
   type: string;
-  value: number | ShapeType;
-  displayValue: string;
+  value: number | ShapeType | string;
+  displayValue?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   min?: string;
   max?: string;
   step?: string;
+  inputClassName?: string;
+  placeholder?: string;
 }
 
 export default function CustomInput({
   label,
   value,
-  displayValue,
+  displayValue = "",
   type,
-  min = undefined,
-  max = undefined,
-  step = undefined,
+  min = "",
+  max = "",
+  step = "",
+  inputClassName = "",
   onChange,
+  placeholder = "",
 }: CustomInputProps) {
   return (
     <div className={CLASSNAME.LAYOUT.PROPERTY_GROUP}>
@@ -35,15 +39,12 @@ export default function CustomInput({
           max={max}
           step={step}
           value={value}
+          className={inputClassName}
           onChange={onChange}
+          placeholder={placeholder}
         />
         <span>{displayValue}</span>
       </div>
     </div>
   );
 }
-CustomInput.defaultProps = {
-  min: undefined,
-  max: undefined,
-  step: undefined,
-};

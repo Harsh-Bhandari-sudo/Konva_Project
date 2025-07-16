@@ -38,6 +38,7 @@ const TEXT = {
     LOAD: "Load",
     DELETE_SHAPE: "Delete Shape",
     DELETE_IMAGE: "Delete Image",
+    DELETE_TEXT: "Delete Text",
   },
   ICON: {
     CROSS: "×",

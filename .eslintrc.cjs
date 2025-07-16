@@ -33,6 +33,7 @@ module.exports = {
     ], // Ensure ESLint uses your Prettier configuration
     "react/react-in-jsx-scope": "off", // Not needed in React 17+
     "jsx-a11y/accessible-emoji": "off",
+    'react/require-default-props': 'off',
     "react/prop-types": "off", // Disable prop-types enforcement for TypeScript projects
     "@typescript-eslint/explicit-function-return-type": "off",
     "simple-import-sort/imports": "off",

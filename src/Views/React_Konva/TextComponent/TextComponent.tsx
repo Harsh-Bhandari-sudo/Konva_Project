@@ -5,6 +5,8 @@ import { SketchPicker } from "@hello-pangea/color-picker";
 
 // components
 import ZIndex from "../../../Components/Molecule/ZIndex";
+import CustomSelect from "../../../Components/Atom/CustomSelect/CustomSelect";
+import CustomInput from "../../../Components/Atom/CustomInput";
 
 // constants and utils
 import { TextComponentProps, FontFamily, FontWeight } from "./helper/type";
@@ -118,65 +120,42 @@ function TextComponent({
 
       <div className="text-properties">
         <h4>Text Properties</h4>
-
-        <div className="property-group">
-          <label>Font Size:</label>
-          <div className="text-property">
-            <input
-              className="input-font-size"
-              type="number"
-              value={textFontSize}
-              onChange={(e) => {
-                const value = parseInt(e.target.value);
-                setTextFontSize(value);
-                if (selectedTextId) {
-                  updateTextProperty("fontSize", value);
-                }
-              }}
-            />
-            <span>px</span>
-          </div>
-        </div>
-
-        <div className="property-group">
-          <label>Font Weight:</label>
-          <select
-            className="font-weight-property"
-            value={textFontWeight}
-            onChange={(e) => {
-              setTextFontWeight(e.target.value as FontWeight);
-              if (selectedTextId) {
-                updateTextProperty("fontStyle", e.target.value);
-              }
-            }}
-          >
-            {FONT_WEIGHT_PROPERTY.map((weight) => (
-              <option key={weight.value} value={weight.value}>
-                {weight.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="property-group">
-          <label>Font Family:</label>
-          <select
-            className="font-family-property"
-            value={textFontFamily}
-            onChange={(e) => {
-              setTextFontFamily(e.target.value as FontFamily);
-              if (selectedTextId) {
-                updateTextProperty("fontFamily", e.target.value);
-              }
-            }}
-          >
-            {FONT_FAMILY_PROPERTY.map((family) => (
-              <option key={family.value} value={family.value}>
-                {family.label}
-              </option>
-            ))}
-          </select>
-        </div>
+        <CustomInput
+          label="Font Size:"
+          inputClassName="input-font-size"
+          type="number"
+          value={textFontSize}
+          onChange={(e) => {
+            const value = parseInt(e.target.value, 10);
+            setTextFontSize(value);
+            if (selectedTextId) {
+              updateTextProperty("fontSize", value);
+            }
+          }}
+          displayValue="px"
+        />
+        <CustomSelect
+          label="Font Weight:"
+          value={selectedText?.fontStyle ?? textFontWeight}
+          onChange={(e) => {
+            setTextFontWeight(e.target.value as FontWeight);
+            if (selectedTextId) {
+              updateTextProperty("fontStyle", e.target.value);
+            }
+          }}
+          displayOptions={FONT_WEIGHT_PROPERTY}
+        />
+        <CustomSelect
+          label="Font Family:"
+          value={textFontFamily}
+          onChange={(e) => {
+            setTextFontFamily(e.target.value as FontFamily);
+            if (selectedTextId) {
+              updateTextProperty("fontFamily", e.target.value);
+            }
+          }}
+          displayOptions={FONT_FAMILY_PROPERTY}
+        />
 
         <div className="color-controls">
           <label>Color:</label>
@@ -190,70 +169,40 @@ function TextComponent({
       {selectedText && (
         <div className="selected-text">
           <h4>Selected Text: "{selectedText.text}"</h4>
-
-          <div className="property-group">
-            <label>Edit Text:</label>
-            <input
-              type="text"
-              value={selectedText.text}
-              onChange={(e) => updateTextProperty("text", e.target.value)}
-              placeholder="Edit text content..."
-            />
-          </div>
+          <CustomInput
+            label="Edit Text:"
+            type="text"
+            value={selectedText.text}
+            onChange={(e) => updateTextProperty("text", e.target.value)}
+            placeholder="Edit text content..."
+          />
 
           <div className="text-style-controls">
-            <div className="property-group">
-              <label>Font Size:</label>
-              <div className="text-property">
-                <input
-                  key={`font-size-${selectedText?.id}`}
-                  className="input-font-size"
-                  type="number"
-                  value={selectedText?.fontSize || textFontSize}
-                  onChange={(e) => {
-                    const value = parseInt(e.target.value);
-                    setTextFontSize(value);
-                    updateTextProperty("fontSize", value);
-                  }}
-                />
-                <span>px</span>
-              </div>
-            </div>
-
-            <div className="property-group">
-              <label>Font Weight:</label>
-              <select
-                className="font-weight-property"
-                value={selectedText.fontStyle}
-                onChange={(e) =>
-                  updateTextProperty("fontStyle", e.target.value)
-                }
-              >
-                {FONT_WEIGHT_PROPERTY.map((weight) => (
-                  <option key={weight.value} value={weight.value}>
-                    {weight.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="property-group">
-              <label>Font Family:</label>
-              <select
-                value={selectedText.fontFamily}
-                onChange={(e) =>
-                  updateTextProperty("fontFamily", e.target.value)
-                }
-              >
-                {FONT_FAMILY_PROPERTY.map((family) => (
-                  <option key={family.value} value={family.value}>
-                    {family.label}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <CustomInput
+              label="Font Size:"
+              type="number"
+              value={selectedText?.fontSize || textFontSize}
+              onChange={(e) => {
+                const value = parseInt(e.target.value, 10);
+                setTextFontSize(value);
+                updateTextProperty("fontSize", value);
+              }}
+              inputClassName="input-font-size"
+              displayValue="px"
+            />
+            <CustomSelect
+              label="Font Weight:"
+              value={selectedText.fontStyle}
+              onChange={(e) => updateTextProperty("fontStyle", e.target.value)}
+              displayOptions={FONT_WEIGHT_PROPERTY}
+            />
+            <CustomSelect
+              label="Font Family:"
+              value={selectedText.fontFamily}
+              onChange={(e) => updateTextProperty("fontFamily", e.target.value)}
+              displayOptions={FONT_FAMILY_PROPERTY}
+            />
           </div>
-
           <ZIndex
             bringToFront={bringToFront}
             moveForward={moveForward}
@@ -263,13 +212,13 @@ function TextComponent({
             updateProperty={updateTextProperty}
           />
 
-          <div className="delete-text">
+          <div className={CLASSNAME.LAYOUT.DELETE_TEXT}>
             <button
               type="button"
               onClick={deleteSelectedText}
-              className="delete-btn"
+              className={CLASSNAME.BUTTON.DELETE}
             >
-              Delete Text
+              {TEXT.BUTTON.DELETE_TEXT}
             </button>
           </div>
         </div>

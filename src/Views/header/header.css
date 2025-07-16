@@ -31,8 +31,6 @@
 }
 
 .search-container input {
-  border: none;
-  outline: none;
   border-radius: 3px;
   width: 256px;
   height: 13px;

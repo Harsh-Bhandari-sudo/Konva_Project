@@ -1,6 +1,6 @@
-projectKey=TEMPLATE
+projectKey=TEMPL
 serverUrl=http://localhost:9000
 serverVersion=25.4.0.105899
-dashboardUrl=http://localhost:9000/dashboard?id=TEMPLATE
-ceTaskId=c724c8e7-d02d-46c8-bd7a-d5a63018ac68
-ceTaskUrl=http://localhost:9000/api/ce/task?id=c724c8e7-d02d-46c8-bd7a-d5a63018ac68
+dashboardUrl=http://localhost:9000/dashboard?id=TEMPL
+ceTaskId=529036c3-74f9-47ab-b092-bf00f6b726f4
+ceTaskUrl=http://localhost:9000/api/ce/task?id=529036c3-74f9-47ab-b092-bf00f6b726f4

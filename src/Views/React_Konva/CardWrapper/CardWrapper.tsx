@@ -36,6 +36,7 @@ import TemplateContainer from "../TemplateContainer/TemplateContainer";
 import ColorComponent from "../ColorComponent/ColorComponent";
 import RenderImage from "../RenderComponent/RenderComponent";
 import FilterButtons from "../FilterButtons/FilterButtons";
+import TEXT from "../../../Shared/text";
 
 type TemplateListItem = {
   name: string;
@@ -45,7 +46,7 @@ type TemplateListItem = {
 function CardWrapper() {
   const location = useLocation();
   const navigate = useNavigate();
-  const selectedSize = location?.state?.size || undefined;
+  const selectedSize = location?.state?.size;
   const [size] = useState(selectedSize || { height: 700, width: 600 });
 
   const [templates, setTemplates] = useState<TemplateListItem[]>([]);
@@ -319,8 +320,8 @@ function CardWrapper() {
       type,
       x: 20,
       y: 20,
-      width: type === "circle" ? 100 : 100,
-      height: type === "circle" ? 100 : 100,
+      width: 100,
+      height: 100,
       fill: shapeColor,
       stroke: strokeColor,
       strokeWidth,
@@ -670,16 +671,19 @@ function CardWrapper() {
   };
 
   const handleDragOver = (e: React.DragEvent) => {
+    console.log("dragOver");
     e.preventDefault();
     setDragOver(true);
   };
 
   const handleDragLeave = (e: React.DragEvent) => {
+     console.log("draglEAVE");
     e.preventDefault();
     setDragOver(false);
   };
 
   const handleDrop = (e: React.DragEvent) => {
+       console.log("dragDROP");
     e.preventDefault();
     setDragOver(false);
     handleFileUpload(e.dataTransfer.files);
@@ -960,7 +964,7 @@ function CardWrapper() {
             <span>Background</span>
             {backgroundImage ? (
               <div className="selected-image">
-                <img src={backgroundImage.src} />
+                <img src={backgroundImage.src} alt={TEXT.TITLE.ALT} />
               </div>
             ) : (
               <div className="size-dimensions">
